@@ -1,0 +1,27 @@
+<head>
+  <title>aiguebeletteParty</title>
+</head>
+
+<body>
+	<div id="container"> 
+		{{> content}}
+		{{> form}}
+	</div>
+</body>
+
+<template name="content">
+	<div id="content">
+		{{#each line}}
+		<p>{{timestamp}} {{author}} {{content}}</p>
+		{{/each}}
+	</div>
+</template>
+
+<template name="form">
+	<div id="form">
+		AT {{when}}
+		USER <input id="authorInput" type="text" value={{randomUsr}}>
+		SAYS <input id="mainTxtInput" type="text">
+		<button id="eraseAll">ERASE</button>
+	</div>
+</template>
