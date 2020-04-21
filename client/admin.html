@@ -1,0 +1,33 @@
+<template name="vueAdmin">
+	{{test}}
+
+	
+	<div id="content">
+		{{#each lineADMIN}}
+		<div id="contentblock">
+			<div id="left">
+			<span id="author" class="lowKey">{{author}} :</span> <!-- <span id="timestamp" class="lowKey">{{formatedDate timestamp}}</span> -->
+			</div>
+			
+			<div id="right"><span id="actualContent" class={{author}}> {{content}}</span>
+			</div>
+		</div>
+		{{/each}}
+
+	</div>
+
+<div id="form">
+
+	<div id="contentblock">	
+		<div id="right">
+			<textarea id="mainTxtInput" type="text" wrap="soft" placeholder="..." onfocus="this.placeholder=''" onblur="this.placeholder='...'"></textarea>
+		</div>
+	</div>
+
+	<button id="envoyer">ENVOYER ⏎</button>
+
+</div>
+
+
+</template>
+

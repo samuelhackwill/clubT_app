@@ -1,15 +1,25 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-Blahblah = new Meteor.Collection('Blahblah');
+TheDiscussion = new Meteor.Collection('TheDiscussion');
+TheIds = new Meteor.Collection("TheIds")
+CardTime = new Meteor.Collection("CardTime")
 
 var Schemas = {};
 
-Schemas.Blahblah = new SimpleSchema({
+Schemas.CardTime = new SimpleSchema({
+
+	"activated" : {
+		type : String
+	}
+
+});
+
+Schemas.TheDiscussion = new SimpleSchema({
 
 	"content" : {
 		type : String,
 		label : "content",
-		max : 200,
+		max : 800,
 		optional : true
 	},
 	"author" : {
@@ -29,9 +39,16 @@ Schemas.Blahblah = new SimpleSchema({
 
 });
 
-Blahblah.attachSchema(Schemas.Blahblah);
+Schemas.TheIds = new SimpleSchema({
 
-SimpleSchema.messages({
-	// for custom error messages
-  maxString: "L'année dernière, grégoire et jacob ont pourri le site en copiant/collant des articles sur le général de gaulle issus de wikipedia. Cette année, la taille maximum d'un post est limitée.",
-	})
+	"theid" : {
+		type : Number,
+		label : "theid",
+		optional : false
+	}
+
+});
+
+
+TheDiscussion.attachSchema(Schemas.TheDiscussion);
+TheIds.attachSchema(Schemas.TheIds);

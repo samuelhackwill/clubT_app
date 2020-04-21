@@ -1,36 +1,65 @@
 import { Meteor } from 'meteor/meteor';
 import '/imports/methods';
 
+if (Meteor.isServer) {
+  
+  Meteor.publish('TheDiscussion', function tasksPublication() {
+
+    return TheDiscussion.find();
+
+  });
+
+  Meteor.publish('TheIds', function tasksPublication() {
+
+    return TheIds.find();
+
+  });
+
+  Meteor.publish('CardTime', function tasksPublication() {
+
+    return CardTime.find();
+
+  });
+
+}
+
 Meteor.methods({
     scrollDivServer : function(){
-      console.log("le serveur suce tout seul")
+      console.log("fuck")
       Meteor.call('scrollDiv')
+    },
+
+    removeAll : function(){
+      TheDiscussion.remove({})
     }
 })
 
-Blahblah.deny({
-  insert: function (){
-	  throw new Meteor.Error(403, "Access denied")
-	  return true
+TheDiscussion.allow({
+  insert:function(){
+    return true
   },
-
-  update: function(){
- 	  throw new Meteor.Error(403, "Access denied")
-	  return true
-  },
-
-  remove:function(){
-  	// là faudrait lire le cookie ou la variable locale qui stipule le nom d'usager
-  	// mais argh c'est craignos tu vois parce que c'est du code visible sur le client ça
-  	// du coup tout le monde peut voir le nom d'usager qui va bien
-  	// peut être le mieux c'est de garder ce string sur le serveur et l'appeller depuis ici
-
-  //   if (!loggedInUser || !Roles.userIsInRole(loggedInUser, ['admin'])) {
-  //     throw new Meteor.Error(403, "Access denied")
-  //   }
-  //   return true; 
-  // },
-	  throw new Meteor.Error(403, "Access denied")
-	  return true
+    remove:function(){
+    return true
   }
-});
+})
+
+CardTime.allow({
+  insert:function(){
+    return true
+  },
+    remove:function(){
+    return true
+  },
+  update:function(){
+    return true
+  }
+})
+
+TheIds.allow({
+  insert:function(){
+    return true
+  },
+  remove:function(){
+    return true
+  }
+})
