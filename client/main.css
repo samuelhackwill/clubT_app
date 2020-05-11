@@ -45,6 +45,10 @@
     font-style: normal;
 }
 
+svg{
+	height:100%;
+}
+
 #firsthihi{
 	margin-left:4vw;
 }
@@ -57,7 +61,7 @@
 
 #waiting{
 	font-family:Avara_Black !important;
-	font-size:1.5vw;
+	font-size:2vw;
 	width:66vw;
 	margin-top:2vw;
 	margin-left:2vw;
@@ -106,7 +110,7 @@
 	background-color:chartreuse;
 	color:black;
 }
-.Thomas{
+.Nicole{
 	background-color:chartreuse;
 	color:black;
 }
@@ -124,8 +128,30 @@ body{
 }
 
 #container{
-	width:100%;
-	height:100%;
+	width:98vw;
+	height:98vh;
+
+	display: grid;
+	grid-template-columns: 16.66%16.66%10.66%16.66%16.66%16.66%;
+	grid-template-rows: 25% 25% 25% 25%;
+}
+
+#phylactereContainer{
+	grid-row-start: 1;
+	grid-row-end: span 1;
+	grid-column-start: 4;
+	grid-column-end: span 3;
+}
+
+#phylactere{
+	background-color: white;
+	border: solid;
+    position: relative;
+    max-width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    top: 50%;
+transform: translate(0%,-50%);
 }
 
 .tarotc:hover{
@@ -134,7 +160,6 @@ body{
 }
 
 #content{
-	height: 80vh;
 	overflow-y: scroll;
 	word-wrap: break-word;
 	padding-right:18px;
@@ -144,15 +169,22 @@ body{
 	color:black;
 }
 
-#form{
-	position: fixed;
-	width:inherit;
+#mainTxtInput{
+	font-family: Avara_Black, serif;
+	font-size:20px;
+	border:none;
+	background-color:lightgrey;
+	color:black;
+	width:100%;
+	word-wrap: break-word;
+	resize:none;
 }
 
 #envoyer{
 	font-size: 1.5vh;
-	height:3vh;
-	font-family: inherit;
+/*	height:3vh;
+*/	font-family: inherit;
+	margin-bottom:10px;
 }
 
 #actualContent{
@@ -168,22 +200,58 @@ body{
 }
 
 #leftColumn{
-	float:left;
-	width:30vw;
-	margin-left: 2vw;
-	margin-top: 2vh;
-	overflow:hidden;
+	display:inherit;
+
+	grid-column-start: 1;
+	grid-column-end: span 2;
+	grid-row-start: 1;
+	grid-row-end: span 4;
 }
 
-#tractContainer{
-	height:98vh;
-	width:100%;
+#mithildeMug{
+	background-image: url("mithidBD.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	grid-row-start: 1;
+	grid-row-end: span 1;
+
+	grid-column-start:3;
+	grid-column-end:span 1;
 }
 
-#rightColumn{
-	width:63vw;
-	float:right;
+#mithildeAnimated{
+	opacity: 0;
+	background-image: url("mithidBD2.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	grid-row-start: 1;
+	grid-row-end: span 1;
+
+	grid-column-start:3;
+	grid-column-end:span 1;
+
+	animation: blabla .3s infinite linear;
 }
+
+@keyframes blabla {
+ 0%, 100%{background-image: url("mithidBD.png");}
+ 50%{background-image: url("mithidBD2.png");}
+}
+
+
+#cartes{
+
+	grid-row-start: 2;
+	grid-row-end: span 3;
+
+	grid-column-start:3;
+	grid-column-end:span 4;
+}
+
 
 #right{
 	margin-bottom:15px;
@@ -205,21 +273,22 @@ input:focus{
 	margin-bottom:15px;
 }
 
-#mainTxtInput{
-	height:12vh;
-	font-family: Avara_Black, serif;
-	font-size:30px;
-	border:none;
-	background-color:lightgrey;
-	color:black;
-	width:100%;
-	word-wrap: break-word;
-	resize:none;
-	margin-bottom:1vh;
+#formINSTRUCTIONS{
+grid-row-start: 1;
+grid-row-end: span 2;
+grid-column-start: 3;
+grid-column-end: span 5;
 }
 
-svg{
-	size: 100%;
+#instructionsInput{
+	width:100%;
+	height:100%;
+}
+
+
+#envoyerINSTRUCTIONS{
+	height:50px;
+	width:100px;
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */

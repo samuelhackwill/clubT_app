@@ -36,6 +36,21 @@ query.observeChanges({
 	}
 })
 
+var qqquery = TheInstructions.find();
+qqquery.observeChanges({
+	changed:function(){
+
+		document.getElementById("mithildeMug").style.opacity="0"
+		document.getElementById("mithildeAnimated").style.opacity="1"
+
+		setTimeout(function(){
+		document.getElementById("mithildeMug").style.opacity="1"
+		document.getElementById("mithildeAnimated").style.opacity="0"
+
+	},2000)
+	}
+})
+
 var queryy = CardTime.find();
 queryy.observeChanges({
 	changed(id,fields){
@@ -83,7 +98,17 @@ Template.content.onCreated(function helloOnCreated() {
 			// showError("BIENVENUE : ",'ici c\'est un forum, hum bon alors c\'est peut être un peu redondant avec toutes les technologies qui existent aujourd\'hui, genre facebook 💩 et autres, m\'enfin ici ce qui est cool c\'est que si vous tapez \"play\" ben ça va jouer un son de quelqu\'un qui parle de concours d\'entrée en écoles d\'art. Quand vous en avez marre vous pouvez aussi taper \"silencio\" et le son va s\'arrêter. Voilà à plus tard! faites ce que vous voulez de cette espace, peut être avec jean-claude on s\'en servira aussi pour mettre des rappels de planning \& des comptes-rendus de ce qui va se passer ces jours.',"")
 	},
 		onError: function () { console.log("onError", arguments); }
+	});	
+
+	Meteor.subscribe("TheInstructions", {
+		onReady: function () { 
+			// console.log("onReady And the Items actually Arrive", arguments); 
+			// showError("BIENVENUE : ",'ici c\'est un forum, hum bon alors c\'est peut être un peu redondant avec toutes les technologies qui existent aujourd\'hui, genre facebook 💩 et autres, m\'enfin ici ce qui est cool c\'est que si vous tapez \"play\" ben ça va jouer un son de quelqu\'un qui parle de concours d\'entrée en écoles d\'art. Quand vous en avez marre vous pouvez aussi taper \"silencio\" et le son va s\'arrêter. Voilà à plus tard! faites ce que vous voulez de cette espace, peut être avec jean-claude on s\'en servira aussi pour mettre des rappels de planning \& des comptes-rendus de ce qui va se passer ces jours.',"")
+	},
+		onError: function () { console.log("onError", arguments); }
 	});
+
+
 	Meteor.subscribe("TheIds", {
 		onReady: function () { 
 			// console.log("onReady And the Items actually Arrive", arguments); 
@@ -141,11 +166,17 @@ console.log("onrendered fired")
 	}; 
 })
 
+Template.instructions.helpers({
+	instruction:function(){
+		return "Mathilde : "+TheInstructions.find({}).fetch()[0].content
+	}
+})
+
 Template.content.helpers({
 	line:function(){
 		// console.log("new line fetched")
 		// montre moi les posts de MOI MEME, ou un des admins.
-		return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Thomas']}});
+		return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Nicole']}});
 	},
 
 	checkAdmin:function(){
@@ -157,7 +188,7 @@ Template.content.helpers({
 
 		console.log("checking")
 
-		if(this.author==="Mathilde"||this.author==="Thomas"||this.author==="Samuel"){
+		if(this.author==="Mathilde"||this.author==="Nicole"||this.author==="Samuel"){
 			return true
 		}else{
 			return false
@@ -411,7 +442,7 @@ pushTxt = function(){
 				showError("ERREUR : ",error.reason, message)
 			}else{
 				console.log("message bien inséré dans la db, ", result)
-				if(localId!="Mathilde"||"Thomas"||"Samuel"){
+				if(localId!="Mathilde"||"Nicole"||"Samuel"){
 				jauge = jauge + message.length
 				}	
 				clearTimeout(clearJauge)
@@ -426,6 +457,29 @@ pushTxt = function(){
 	// message = ""
 	// mmh relou cette histoire de truc que j'ai pas compris là
 	document.getElementById("mainTxtInput").value=""
+}
+
+
+pushInstr = function(){
+	var untrimmedmsg = document.getElementById("instructionsInput").value
+
+	message = untrimmedmsg.trim()
+
+	console.log("MESSAGE "+ message)
+
+	if(message=="\n" || message==""){
+		document.getElementById("instructionsInput").value=""
+		return false
+		// message="..."
+		// jauge = jauge + 450
+	}
+
+
+		Meteor.call('newInstruction',{message})
+	// }
+	// message = ""
+	// mmh relou cette histoire de truc que j'ai pas compris là
+	document.getElementById("instructionsInput").value=""
 }
 
 

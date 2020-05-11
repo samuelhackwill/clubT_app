@@ -35,7 +35,9 @@ Template.vueAdmin.onCreated(function helloOnCreated() {
 	});
 
 			Meteor.subscribe("CardTime", {
-	})
+	});
+			Meteor.subscribe("TheInstructions", {
+	});
 
 });
 
@@ -64,16 +66,27 @@ Template.vueAdmin.helpers({
 
 
 Template.vueAdmin.events({
-	'keyup #mainTxtInput' : function(e){
-	    e = e || window.event
-		if (e.keyCode == '13'){
-				pushTxt();
-		}
-	},
+	// 'keyup #mainTxtInput' : function(e){
+	//     e = e || window.event
+	// 	if (e.keyCode == '13'){
+	// 			pushTxt();
+	// 	}
+	// },
 
 	'click #envoyer' : function(){
 			pushTxt();
 		document.getElementById("mainTxtInput").focus()
+	},	
+
+	'click .tas' : function(e){
+		// console.log(e.target.innerHTML[3])
+		// 0T 1A 2S 3_ tu vois le délire? faites moi un procès
+		CardTime.update(CardTime.findOne()._id, {$set:{activated:"tas"+e.target.innerHTML[3]}})
+	},
+
+	'click #envoyerINSTRUCTIONS' : function(){
+			pushInstr();
+		document.getElementById("instructionsInput").focus()
 	}
 
 });

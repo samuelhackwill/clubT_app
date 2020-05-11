@@ -10,10 +10,16 @@ if (Meteor.isServer) {
   });
 
   Meteor.publish('TheIds', function() {
-
-    return TheIds.find();
+   return TheIds.find();
 
   });
+
+    Meteor.publish('TheInstructions', function() {
+
+    return TheInstructions.find();
+
+  });
+
 
   Meteor.publish('CardTime', function() {
 
@@ -34,6 +40,15 @@ Meteor.methods({
 })
 
 TheDiscussion.allow({
+  insert:function(){
+    return true
+  },
+    remove:function(){
+    return true
+  }
+})
+
+TheInstructions.allow({
   insert:function(){
     return true
   },

@@ -21,6 +21,20 @@ Meteor.methods({
 		// }
 	},	
 
+	newInstruction : function(obj){
+		//console.log("merci de loger tout ça ", obj.message, obj.who)
+		// if (obj.message=="eraseAll\n" || obj.message=="eraseAll" && obj.who=="ADMIN") {
+		// 	// donc la dans l'idéal je vais chercher ce string dans --meteor-settings
+		// 	TheDiscussion.remove({})
+		// }else{
+
+			TheInstructions.update(TheInstructions.find({}).fetch()[0]._id, {$set:{"content":obj.message}})
+
+			console.log("new instruction, ", obj.message)
+			return(obj)
+		// }
+	},	
+
 	addIds : function(){
 		for(i=0;i<3000;i++){
 			TheIds.insert({theid:i})
