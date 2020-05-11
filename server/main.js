@@ -3,19 +3,19 @@ import '/imports/methods';
 
 if (Meteor.isServer) {
   
-  Meteor.publish('TheDiscussion', function tasksPublication() {
+  Meteor.publish('TheDiscussion', function() {
 
     return TheDiscussion.find();
 
   });
 
-  Meteor.publish('TheIds', function tasksPublication() {
+  Meteor.publish('TheIds', function() {
 
     return TheIds.find();
 
   });
 
-  Meteor.publish('CardTime', function tasksPublication() {
+  Meteor.publish('CardTime', function() {
 
     return CardTime.find();
 
@@ -25,7 +25,6 @@ if (Meteor.isServer) {
 
 Meteor.methods({
     scrollDivServer : function(){
-      console.log("fuck")
       Meteor.call('scrollDiv')
     },
 
