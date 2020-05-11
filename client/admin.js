@@ -76,6 +76,12 @@ Template.vueAdmin.events({
 	'click #envoyer' : function(){
 			pushTxt();
 		document.getElementById("mainTxtInput").focus()
+	},	
+
+	'click .tas' : function(e){
+		// console.log(e.target.innerHTML[3])
+		// 0T 1A 2S 3_ tu vois le délire? faites moi un procès
+		CardTime.update(CardTime.findOne()._id, {$set:{activated:"tas"+e.target.innerHTML[3]}})
 	},
 
 	'click #envoyerINSTRUCTIONS' : function(){

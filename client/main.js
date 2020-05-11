@@ -161,7 +161,7 @@ Template.content.helpers({
 	line:function(){
 		// console.log("new line fetched")
 		// montre moi les posts de MOI MEME, ou un des admins.
-		return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Thomas']}});
+		return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'JeanPaul']}});
 	},
 
 	checkAdmin:function(){
@@ -173,7 +173,7 @@ Template.content.helpers({
 
 		console.log("checking")
 
-		if(this.author==="Mathilde"||this.author==="Thomas"||this.author==="Samuel"){
+		if(this.author==="Mathilde"||this.author==="JeanPaul"||this.author==="Samuel"){
 			return true
 		}else{
 			return false
@@ -427,7 +427,7 @@ pushTxt = function(){
 				showError("ERREUR : ",error.reason, message)
 			}else{
 				console.log("message bien inséré dans la db, ", result)
-				if(localId!="Mathilde"||"Thomas"||"Samuel"){
+				if(localId!="Mathilde"||"JeanPaul"||"Samuel"){
 				jauge = jauge + message.length
 				}	
 				clearTimeout(clearJauge)
