@@ -128,15 +128,24 @@ body{
 	height:98vh;
 
 	display: grid;
-	grid-template-columns: 16.66%16.66%16.66%16.66%16.66%16.66%;
+	grid-template-columns: 16.66%16.66%10.66%16.66%16.66%16.66%;
 	grid-template-rows: 25% 25% 25% 25%;
 }
 
-#phylactere{
+#phylactereContainer{
 	grid-row-start: 1;
 	grid-row-end: span 1;
 	grid-column-start: 4;
 	grid-column-end: span 3;
+}
+
+#phylactere{
+	background-color: white;
+	border: solid;
+    position: relative;
+    width: max-content;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .tarotc:hover{
@@ -191,21 +200,19 @@ body{
 	grid-column-end: span 2;
 	grid-row-start: 1;
 	grid-row-end: span 4;
-
-	border-style: solid;
-	border-color:green;
 }
 
 #mithildeMug{
+	background-image: url("mitid.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+
 	grid-row-start: 1;
 	grid-row-end: span 1;
 
 	grid-column-start:3;
 	grid-column-end:span 1;
-
-	border-radius: 2px;
-	border-style: solid;
-	border-color: red;
 }
 
 #cartes{
@@ -215,10 +222,6 @@ body{
 
 	grid-column-start:3;
 	grid-column-end:span 4;
-
-	border-radius: 2px;
-	border-style: solid;
-	border-color: blue;
 }
 
 
