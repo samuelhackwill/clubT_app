@@ -12,7 +12,9 @@
 		<div id="mithildeMug"></div>
 
 		<div id="phylactereContainer">
-			<div id="phylactere">blablabla?</div>
+			<div id="phylactere">
+				{{> instructions}}
+			</div>
 		</div>
 
 		<div id="cartes">
@@ -27,6 +29,10 @@
   <source src="00math.mp3" type="audio/mp3">
   <p>Your browser doesn't support HTML5 audio. Here is a <a href="00math.mp3">link to the audio</a> instead.</p>
 </audio>
+</template>
+
+<template name="instructions">
+	{{instruction}}
 </template>
 
 <template name="content">

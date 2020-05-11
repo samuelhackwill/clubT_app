@@ -1,6 +1,7 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 TheDiscussion = new Meteor.Collection('TheDiscussion');
+TheInstructions = new Meteor.Collection('TheInstructions');
 TheIds = new Meteor.Collection("TheIds")
 CardTime = new Meteor.Collection("CardTime")
 
@@ -38,6 +39,15 @@ Schemas.TheDiscussion = new SimpleSchema({
 	}
 
 });
+Schemas.TheInstructions = new SimpleSchema({
+
+	"content" : {
+		type : String,
+		label : "content",
+		optional : true
+	}
+
+});
 
 Schemas.TheIds = new SimpleSchema({
 
@@ -51,4 +61,5 @@ Schemas.TheIds = new SimpleSchema({
 
 
 TheDiscussion.attachSchema(Schemas.TheDiscussion);
+TheInstructions.attachSchema(Schemas.TheInstructions);
 TheIds.attachSchema(Schemas.TheIds);

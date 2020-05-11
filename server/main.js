@@ -9,6 +9,12 @@ if (Meteor.isServer) {
 
   });
 
+  Meteor.publish('TheInstructions', function tasksPublication() {
+
+    return TheInstructions.find();
+
+  });
+
   Meteor.publish('TheIds', function tasksPublication() {
 
     return TheIds.find();
@@ -35,6 +41,15 @@ Meteor.methods({
 })
 
 TheDiscussion.allow({
+  insert:function(){
+    return true
+  },
+    remove:function(){
+    return true
+  }
+})
+
+TheInstructions.allow({
   insert:function(){
     return true
   },

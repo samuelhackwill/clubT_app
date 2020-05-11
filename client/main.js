@@ -83,7 +83,17 @@ Template.content.onCreated(function helloOnCreated() {
 			// showError("BIENVENUE : ",'ici c\'est un forum, hum bon alors c\'est peut être un peu redondant avec toutes les technologies qui existent aujourd\'hui, genre facebook 💩 et autres, m\'enfin ici ce qui est cool c\'est que si vous tapez \"play\" ben ça va jouer un son de quelqu\'un qui parle de concours d\'entrée en écoles d\'art. Quand vous en avez marre vous pouvez aussi taper \"silencio\" et le son va s\'arrêter. Voilà à plus tard! faites ce que vous voulez de cette espace, peut être avec jean-claude on s\'en servira aussi pour mettre des rappels de planning \& des comptes-rendus de ce qui va se passer ces jours.',"")
 	},
 		onError: function () { console.log("onError", arguments); }
+	});	
+
+	Meteor.subscribe("TheInstructions", {
+		onReady: function () { 
+			// console.log("onReady And the Items actually Arrive", arguments); 
+			// showError("BIENVENUE : ",'ici c\'est un forum, hum bon alors c\'est peut être un peu redondant avec toutes les technologies qui existent aujourd\'hui, genre facebook 💩 et autres, m\'enfin ici ce qui est cool c\'est que si vous tapez \"play\" ben ça va jouer un son de quelqu\'un qui parle de concours d\'entrée en écoles d\'art. Quand vous en avez marre vous pouvez aussi taper \"silencio\" et le son va s\'arrêter. Voilà à plus tard! faites ce que vous voulez de cette espace, peut être avec jean-claude on s\'en servira aussi pour mettre des rappels de planning \& des comptes-rendus de ce qui va se passer ces jours.',"")
+	},
+		onError: function () { console.log("onError", arguments); }
 	});
+
+
 	Meteor.subscribe("TheIds", {
 		onReady: function () { 
 			// console.log("onReady And the Items actually Arrive", arguments); 
@@ -139,6 +149,12 @@ console.log("onrendered fired")
 			aud.load()
 		}
 	}; 
+})
+
+Template.instructions.helpers({
+	instruction:function(){
+		return "Mathilde : "+TheInstructions.find({}).fetch()[0].content
+	}
 })
 
 Template.content.helpers({
