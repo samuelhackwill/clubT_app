@@ -110,7 +110,7 @@ svg{
 	background-color:chartreuse;
 	color:black;
 }
-.JeanPaul{
+.Nicole{
 	background-color:chartreuse;
 	color:black;
 }
@@ -220,6 +220,28 @@ transform: translate(0%,-50%);
 	grid-column-start:3;
 	grid-column-end:span 1;
 }
+
+#mithildeAnimated{
+	opacity: 0;
+	background-image: url("mithidBD2.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	grid-row-start: 1;
+	grid-row-end: span 1;
+
+	grid-column-start:3;
+	grid-column-end:span 1;
+
+	animation: blabla .3s infinite linear;
+}
+
+@keyframes blabla {
+ 0%, 100%{background-image: url("mithidBD.png");}
+ 50%{background-image: url("mithidBD2.png");}
+}
+
 
 #cartes{
 

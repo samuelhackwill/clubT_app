@@ -36,6 +36,21 @@ query.observeChanges({
 	}
 })
 
+var qqquery = TheInstructions.find();
+qqquery.observeChanges({
+	changed:function(){
+
+		document.getElementById("mithildeMug").style.opacity="0"
+		document.getElementById("mithildeAnimated").style.opacity="1"
+
+		setTimeout(function(){
+		document.getElementById("mithildeMug").style.opacity="1"
+		document.getElementById("mithildeAnimated").style.opacity="0"
+
+	},2000)
+	}
+})
+
 var queryy = CardTime.find();
 queryy.observeChanges({
 	changed(id,fields){
@@ -161,7 +176,7 @@ Template.content.helpers({
 	line:function(){
 		// console.log("new line fetched")
 		// montre moi les posts de MOI MEME, ou un des admins.
-		return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'JeanPaul']}});
+		return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Nicole']}});
 	},
 
 	checkAdmin:function(){
@@ -173,7 +188,7 @@ Template.content.helpers({
 
 		console.log("checking")
 
-		if(this.author==="Mathilde"||this.author==="JeanPaul"||this.author==="Samuel"){
+		if(this.author==="Mathilde"||this.author==="Nicole"||this.author==="Samuel"){
 			return true
 		}else{
 			return false
@@ -427,7 +442,7 @@ pushTxt = function(){
 				showError("ERREUR : ",error.reason, message)
 			}else{
 				console.log("message bien inséré dans la db, ", result)
-				if(localId!="Mathilde"||"JeanPaul"||"Samuel"){
+				if(localId!="Mathilde"||"Nicole"||"Samuel"){
 				jauge = jauge + message.length
 				}	
 				clearTimeout(clearJauge)
