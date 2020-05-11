@@ -445,6 +445,29 @@ pushTxt = function(){
 }
 
 
+pushInstr = function(){
+	var untrimmedmsg = document.getElementById("instructionsInput").value
+
+	message = untrimmedmsg.trim()
+
+	console.log("MESSAGE "+ message)
+
+	if(message=="\n" || message==""){
+		document.getElementById("instructionsInput").value=""
+		return false
+		// message="..."
+		// jauge = jauge + 450
+	}
+
+
+		Meteor.call('newInstruction',{message})
+	// }
+	// message = ""
+	// mmh relou cette histoire de truc que j'ai pas compris là
+	document.getElementById("instructionsInput").value=""
+}
+
+
 // // ci-dessous gros écouteur d'evenements DDP
 //   var _send = Meteor.connection._send;
 //   Meteor.connection._send = function (obj) {

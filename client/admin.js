@@ -35,7 +35,9 @@ Template.vueAdmin.onCreated(function helloOnCreated() {
 	});
 
 			Meteor.subscribe("CardTime", {
-	})
+	});
+			Meteor.subscribe("TheInstructions", {
+	});
 
 });
 
@@ -64,16 +66,21 @@ Template.vueAdmin.helpers({
 
 
 Template.vueAdmin.events({
-	'keyup #mainTxtInput' : function(e){
-	    e = e || window.event
-		if (e.keyCode == '13'){
-				pushTxt();
-		}
-	},
+	// 'keyup #mainTxtInput' : function(e){
+	//     e = e || window.event
+	// 	if (e.keyCode == '13'){
+	// 			pushTxt();
+	// 	}
+	// },
 
 	'click #envoyer' : function(){
 			pushTxt();
 		document.getElementById("mainTxtInput").focus()
+	},
+
+	'click #envoyerINSTRUCTIONS' : function(){
+			pushInstr();
+		document.getElementById("instructionsInput").focus()
 	}
 
 });

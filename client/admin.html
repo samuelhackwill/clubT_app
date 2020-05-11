@@ -1,39 +1,44 @@
 <template name="vueAdmin">
 	{{test}}
 
-	
-	<div id="content">
-		{{#each lineADMIN}}
-		<div id="contentblock">
-			<div id="left">
-			<span id="author" class="lowKey">{{author}} :</span> <!-- <span id="timestamp" class="lowKey">{{formatedDate timestamp}}</span> -->
+	<div id="container"> 
+		<div id="leftColumn">
+			<div id="content">
+				{{#each lineADMIN}}
+				<div id="contentblock">
+					<div id="left">
+					<span id="author" class="lowKey">{{author}} :</span> <!-- <span id="timestamp" class="lowKey">{{formatedDate timestamp}}</span> -->
+					</div>
+					
+					<div id="right"><span id="actualContent" class={{author}}> {{content}}</span>
+					</div>
+				</div>
+				{{/each}}
 			</div>
-			
-			<div id="right"><span id="actualContent" class={{author}}> {{content}}</span>
-			</div>
-		</div>
-		{{/each}}
+		<div id="form">
 
+			<div id="contentblock">	
+				<div id="right">
+					<textarea id="mainTxtInput" type="text" wrap="soft" placeholder="..." onfocus="this.placeholder=''" onblur="this.placeholder='...'"></textarea>
+				</div>
+			</div>
+
+			<button id="envoyer">CHAT ⏎</button>
+
+		</div>
 	</div>
 
-<div id="form">
-
-	<div id="contentblock">	
-		<div id="right">
-			<textarea id="mainTxtInput" type="text" wrap="soft" placeholder="..." onfocus="this.placeholder=''" onblur="this.placeholder='...'"></textarea>
-		</div>
+	<div id="formINSTRUCTIONS">
+		<textarea id="instructionsInput" type="text" wrap="soft"></textarea>
 	</div>
 
-	<button id="envoyer">ENVOYER ⏎</button>
+	<button id="envoyerINSTRUCTIONS">INSTRUCTION ⏎</button>
 
+<button id="tas1">TAS1</button>
+<button id="tas2">TAS2</button>
+<button id="tas3">TAS3</button>
+<button id="tas4">TAS4</button>
 </div>
-
-<div id="formINSTRUCTIONS">
-	<textarea id="instructionsInput" type="text" wrap="soft"></textarea>
-</div>
-
-	<button id="envoyerINSTRUCTIONS">ENVOYER ⏎</button>
-
 
 
 </template>
