@@ -124,12 +124,19 @@ body{
 }
 
 #container{
-	width:100vw;
-	height:100vh;
+	width:98vw;
+	height:98vh;
 
 	display: grid;
-	grid-template-columns: 200px 100px auto 100px;
+	grid-template-columns: 16.66%16.66%16.66%16.66%16.66%16.66%;
 	grid-template-rows: 25% 25% 25% 25%;
+}
+
+#phylactere{
+	grid-row-start: 1;
+	grid-row-end: span 1;
+	grid-column-start: 4;
+	grid-column-end: span 3;
 }
 
 .tarotc:hover{
@@ -138,7 +145,6 @@ body{
 }
 
 #content{
-	height: 80vh;
 	overflow-y: scroll;
 	word-wrap: break-word;
 	padding-right:18px;
@@ -148,10 +154,22 @@ body{
 	color:black;
 }
 
+#mainTxtInput{
+	font-family: Avara_Black, serif;
+	font-size:20px;
+	border:none;
+	background-color:lightgrey;
+	color:black;
+	width:100%;
+	word-wrap: break-word;
+	resize:none;
+}
+
 #envoyer{
 	font-size: 1.5vh;
-	height:3vh;
-	font-family: inherit;
+/*	height:3vh;
+*/	font-family: inherit;
+	margin-bottom:10px;
 }
 
 #actualContent{
@@ -167,27 +185,42 @@ body{
 }
 
 #leftColumn{
+	display:inherit;
+
 	grid-column-start: 1;
 	grid-column-end: span 2;
 	grid-row-start: 1;
-	grid-row-end: 4;
-/*
-	float:left;
-	width:30vw;
-	margin-left: 2vw;
-	margin-top: 2vh;
-	overflow:hidden;*/
+	grid-row-end: span 4;
+
+	border-style: solid;
+	border-color:green;
 }
 
-#tractContainer{
-	height:98vh;
-	width:100%;
+#mithildeMug{
+	grid-row-start: 1;
+	grid-row-end: span 1;
+
+	grid-column-start:3;
+	grid-column-end:span 1;
+
+	border-radius: 2px;
+	border-style: solid;
+	border-color: red;
 }
 
-#rightColumn{
-	width:63vw;
-	float:right;
+#cartes{
+
+	grid-row-start: 2;
+	grid-row-end: span 3;
+
+	grid-column-start:3;
+	grid-column-end:span 4;
+
+	border-radius: 2px;
+	border-style: solid;
+	border-color: blue;
 }
+
 
 #right{
 	margin-bottom:15px;
@@ -207,19 +240,6 @@ input:focus{
 	background-color: blue;
 	color:white;
 	margin-bottom:15px;
-}
-
-#mainTxtInput{
-	height:12vh;
-	font-family: Avara_Black, serif;
-	font-size:30px;
-	border:none;
-	background-color:lightgrey;
-	color:black;
-	width:100%;
-	word-wrap: break-word;
-	resize:none;
-	margin-bottom:1vh;
 }
 
 svg{
