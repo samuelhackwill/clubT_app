@@ -4,27 +4,20 @@ import '/imports/methods';
 if (Meteor.isServer) {
   
   Meteor.publish('TheDiscussion', function() {
-
     return TheDiscussion.find();
-
   });
 
   Meteor.publish('TheIds', function() {
    return TheIds.find();
-
   });
 
     Meteor.publish('TheInstructions', function() {
-
     return TheInstructions.find();
-
   });
 
 
   Meteor.publish('CardTime', function() {
-
     return CardTime.find();
-
   });
 
 }

@@ -23,21 +23,12 @@ Template.registerHelper('formatedDate', function(timestamp) {
   return moment(timestamp).format('dddd [à] LT');
 });
 
-Template.vueAdmin.onCreated(function helloOnCreated() {
+Template.vueAdmin.onCreated(function() {
 	moment.locale('fr')
 	// shuffle(allAudio);
-	Meteor.subscribe("TheDiscussion", {
-		onReady: function () { 
-			// console.log("onReady And the Items actually Arrive", arguments); 
-			// showError("BIENVENUE : ",'ici c\'est un forum, hum bon alors c\'est peut être un peu redondant avec toutes les technologies qui existent aujourd\'hui, genre facebook 💩 et autres, m\'enfin ici ce qui est cool c\'est que si vous tapez \"play\" ben ça va jouer un son de quelqu\'un qui parle de concours d\'entrée en écoles d\'art. Quand vous en avez marre vous pouvez aussi taper \"silencio\" et le son va s\'arrêter. Voilà à plus tard! faites ce que vous voulez de cette espace, peut être avec jean-claude on s\'en servira aussi pour mettre des rappels de planning \& des comptes-rendus de ce qui va se passer ces jours.',"")
-	},
-		onError: function () { console.log("onError", arguments); }
-	});
-
-			Meteor.subscribe("CardTime", {
-	});
-			Meteor.subscribe("TheInstructions", {
-	});
+			Meteor.subscribe("CardTime");
+			Meteor.subscribe("TheInstructions");
+			Meteor.subscribe("TheDiscussion");
 
 });
 
