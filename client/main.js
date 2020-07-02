@@ -94,15 +94,15 @@ Template.content.onCreated(function() {
 	// shuffle(allAudio);
 	Meteor.subscribe("TheDiscussion");	
 	Meteor.subscribe("TheInstructions");	
-
+	Meteor.subscribe("CardTime", {})
 
 	Meteor.subscribe("TheIds", {
 		onReady: function () { 
 			// console.log("onReady And the Items actually Arrive", arguments); 
 			// showError("BIENVENUE : ",'ici c\'est un forum, hum bon alors c\'est peut être un peu redondant avec toutes les technologies qui existent aujourd\'hui, genre facebook 💩 et autres, m\'enfin ici ce qui est cool c\'est que si vous tapez \"play\" ben ça va jouer un son de quelqu\'un qui parle de concours d\'entrée en écoles d\'art. Quand vous en avez marre vous pouvez aussi taper \"silencio\" et le son va s\'arrêter. Voilà à plus tard! faites ce que vous voulez de cette espace, peut être avec jean-claude on s\'en servira aussi pour mettre des rappels de planning \& des comptes-rendus de ce qui va se passer ces jours.',"")
 		
-	// attribution d'un ID unique
-	// bon on part du principe que personne va trifouiller la variable de session
+			// attribution d'un ID unique
+			// bon on part du principe que personne va trifouiller la variable de session
 
 			Session.set("localId",TheIds.findOne().theid)
 			TheIds.remove({_id:TheIds.findOne()._id})
@@ -111,7 +111,28 @@ Template.content.onCreated(function() {
 	},
 		onError: function () { console.log("onError", arguments); }
 	});
-		Meteor.subscribe("CardTime", {})
+});
+
+
+Template.vueParticipant.onRendered(function(){
+ document.body.style.opacity=1
+});
+
+Template.loading.onRendered(function(){
+ document.body.style.opacity=1
+});
+
+Template.waiting.onCreated(function(){
+	Meteor.subscribe("ViewSwitcher", {})
+	Meteor.subscribe("GlobalVars", {})
+});
+
+Template.waiting.onRendered(function(){
+ document.body.style.opacity=1
+});
+
+Template.aftershow.onRendered(function(){
+ document.body.style.opacity=1
 });
 
 Template.content.onRendered(function yo(){
@@ -151,6 +172,17 @@ console.log("onrendered fired")
 		}
 	}; 
 })
+
+Template.waiting.helpers({
+	RDV:function(){
+		if (GlobalVars.findOne({"name":"RDV"})===undefined || GlobalVars.findOne({"name":"RDV"}).value=="0") {
+			return
+		}else{
+			return "Rendez-vous à "+GlobalVars.findOne({"name":"RDV"}).value+"h."
+		}
+
+	}
+});
 
 Template.instructions.helpers({
 	instruction:function(){

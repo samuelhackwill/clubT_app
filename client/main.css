@@ -45,6 +45,11 @@
     font-style: normal;
 }
 
+body{
+	opacity: 0;
+	transition: opacity .3s;
+}
+
 svg{
 	height:100%;
 }
@@ -59,7 +64,7 @@ svg{
 }
 
 
-#waiting{
+#waitingScreen{
 	font-family:Avara_Black !important;
 	font-size:2vw;
 	width:66vw;
@@ -79,6 +84,18 @@ svg{
     #scrollhider {
         display:none;
     }
+}
+
+.container{
+	background-color:yellow;
+	grid-row-start:4;
+	border-style: solid;
+	border-color:black;
+}
+
+.tas{
+	width:100px;
+	height:100px;
 }
 
 #tas1:hover{
@@ -275,7 +292,7 @@ input:focus{
 
 #formINSTRUCTIONS{
 grid-row-start: 1;
-grid-row-end: span 2;
+grid-row-end: span 1;
 grid-column-start: 3;
 grid-column-end: span 5;
 }
@@ -287,8 +304,22 @@ grid-column-end: span 5;
 
 
 #envoyerINSTRUCTIONS{
+	background-color:lightblue;
 	height:50px;
 	width:100px;
+}
+
+#DESACTIVAY{
+	background-color:grey;
+}
+
+.removeAll{
+	grid-row-start:4;
+	background-color:red;
+	height:50px;
+	width:100px;
+
+	margin-left:100px;
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */

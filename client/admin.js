@@ -26,26 +26,34 @@ Template.registerHelper('formatedDate', function(timestamp) {
 Template.vueAdmin.onCreated(function() {
 	moment.locale('fr')
 	// shuffle(allAudio);
-			Meteor.subscribe("CardTime");
-			Meteor.subscribe("TheInstructions");
-			Meteor.subscribe("TheDiscussion");
+	Meteor.subscribe("CardTime");
+	Meteor.subscribe("ViewSwitcher");
+	Meteor.subscribe("TheInstructions");
+	Meteor.subscribe("TheDiscussion");
+	Meteor.subscribe("GlobalVars");
 
 });
 
 
 Template.vueAdmin.onRendered(function yo(){
+	document.body.style.opacity=1
+
 	// là faut trouver un meilleur hook, probablement un onbefore action avec iron router
 	document.getElementById("mainTxtInput").focus();
 
-console.log("onrendered fired")
+	console.log("onrendered fired")
 
 });
 
 Template.vueAdmin.helpers({
-	test:function(){
-		return Session.get("localId")
+	currentRDV:function(){
+		return GlobalVars.findOne({"name":"RDV"}).value
 	},
-
+	
+	ViewSwitchers:function(){
+	    return ViewSwitcher.find({})
+  	},
+  	
 	lineADMIN:function(){
 		// console.log("new line fetched")
 		// montre moi les posts de MOI MEME, ou un des admins.
@@ -63,9 +71,36 @@ Template.vueAdmin.events({
 	// 			pushTxt();
 	// 	}
 	// },
+	'keyup #timeRDV' : function(e){
+		whattime = document.getElementById("timeRDV").value
+		fetched = GlobalVars.findOne({"name":"RDV"})
+		GlobalVars.update(fetched._id, {$set:{"value":whattime},})
+	},
+
+
+	'click .removeAll' : function(){
+		Meteor.call("removeAll")
+	},
+
+	'click .viewSwitcher' : function(e){
+	    console.log(e.target.id)
+	    fetched = ViewSwitcher.find({}).fetch()
+
+	    // you know what? can't be arsed
+
+	    for(i=fetched.length-1; i>-1; i--){
+	    // uncheck all the other checkboxes
+			ViewSwitcher.update(fetched[i]._id, {$set:{"activated":false},})
+	    }
+
+    // change the db for the checked checkbox
+	    ViewSwitcher.update(ViewSwitcher.find({"name":e.target.id}).fetch()[0]._id, {$set:{"activated":!ViewSwitcher.find({"name":e.target.id}).fetch()[0].activated},})
+
+  },
+
 
 	'click #envoyer' : function(){
-			pushTxt();
+		pushTxt();
 		document.getElementById("mainTxtInput").focus()
 	},	
 
