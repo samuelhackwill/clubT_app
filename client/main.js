@@ -65,7 +65,6 @@ queryy.observeChanges({
 			document.getElementById("tas2PLAYD").style.display="none"
 			document.getElementById("tas3PLAYD").style.display="none"
 			document.getElementById("tas4PLAYD").style.display="none"
-			document.getElementById("tas5PLAYD").style.display="none"
 			document.getElementById("tarot").style.display="block"
 
 		}
@@ -178,7 +177,7 @@ Template.waiting.helpers({
 		if (GlobalVars.findOne({"name":"RDV"})===undefined || GlobalVars.findOne({"name":"RDV"}).value=="0") {
 			return
 		}else{
-			return "Rendez-vous à "+GlobalVars.findOne({"name":"RDV"}).value+"h."
+			return "Rendez-vous à "+GlobalVars.findOne({"name":"RDV"}).value
 		}
 
 	}

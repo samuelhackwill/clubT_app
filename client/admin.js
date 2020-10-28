@@ -49,7 +49,7 @@ Template.vueAdmin.helpers({
 	currentRDV:function(){
 		return GlobalVars.findOne({"name":"RDV"}).value
 	},
-	
+
 	ViewSwitchers:function(){
 	    return ViewSwitcher.find({})
   	},
@@ -105,13 +105,21 @@ Template.vueAdmin.events({
 	},	
 
 	'click .tas' : function(e){
-		// console.log(e.target.innerHTML[3])
+		console.log(e.target.innerHTML)
+
+		if (e.target.innerHTML[2]=="R") {
+			// lol
+			// c'est le "r" de "tarot"
+			CardTime.update(CardTime.findOne()._id, {$set:{activated:"tarot"+e.target.innerHTML[5]}})
+			return
+		}else{
 		// 0T 1A 2S 3_ tu vois le délire? faites moi un procès
 		CardTime.update(CardTime.findOne()._id, {$set:{activated:"tas"+e.target.innerHTML[3]}})
+		}
 	},
 
 	'click #envoyerINSTRUCTIONS' : function(){
-			pushInstr();
+		pushInstr();
 		document.getElementById("instructionsInput").focus()
 	}
 

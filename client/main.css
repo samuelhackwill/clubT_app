@@ -5,12 +5,12 @@
 }
 
 @font-face {
-	font-family: "vtftools";
+	font-family: "VTFMisterPixel-Tools";
 	src: url('PIXTOOLS.otf') format('opentype');
 }
 
 @font-face {
-    font-family: 'Avara_Bold';
+    font-family: 'Avara-Bold';
     src:    url('Bold/Avara-Bold_web.eot');
     src:    url('Bold/Avara-Bold_web.eot?#iefix') format('embedded-opentype'),
             url('Bold/Avara-Bold_web.woff') format('woff'),
@@ -60,7 +60,7 @@ svg{
 
 
 .hihi{
-	font-family:vtftools !important;
+	font-family:VTFMisterPixel-Tools !important;
 }
 
 
@@ -133,7 +133,7 @@ svg{
 }
 
 body{
-	font-family: 'Avara_Bold',serif;
+	font-family: 'Avara-Bold',serif;
 	background-color: beige;
 	color:black;
 	overflow: hidden;
