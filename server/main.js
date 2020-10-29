@@ -37,6 +37,10 @@ Meteor.startup(function(){
 
 if (Meteor.isServer) {
   
+  Meteor.publish('allTheCards', function() {
+    return TheCards.find();
+  });
+
   Meteor.publish('TheDiscussion', function() {
     return TheDiscussion.find();
   });
@@ -70,7 +74,18 @@ Meteor.methods({
 
     removeAll : function(){
       TheDiscussion.remove({})
-    }
+    },
+
+    newCard: function (obj) {
+      TheCards.insert(obj);
+    },
+
+    editCard: function (args) {
+      console.log("args.obj ", args.obj)
+      TheCards.update(args._id, { $set: args.obj });
+    },
+
+
 })
 
 TheDiscussion.allow({

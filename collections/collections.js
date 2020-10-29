@@ -25,7 +25,7 @@ Schemas.TheCards = new SimpleSchema({
 		type:String,
 	},
 
-	"tas":{
+	"deck":{
 		type:Number,
 		optional:false
 	},
@@ -130,3 +130,15 @@ TheInstructions.attachSchema(Schemas.TheInstructions);
 TheIds.attachSchema(Schemas.TheIds);
 ViewSwitcher.attachSchema(Schemas.ViewSwitcher);
 GlobalVars.attachSchema(Schemas.GlobalVars);
+
+TheCards.allow({
+  insert: function (){
+    return true; 
+  },
+  update: function () { 
+    return true; 
+  },
+  remove: function () {
+    return true; 
+  }
+})

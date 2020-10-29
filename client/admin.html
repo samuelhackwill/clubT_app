@@ -13,48 +13,50 @@
 				</div>
 				{{/each}}
 			</div>
-		<div id="form">
+			<div id="form">
 
-			<div id="contentblock">	
-				<div id="right">
-					<textarea id="mainTxtInput" type="text" wrap="soft" placeholder="..." onfocus="this.placeholder=''" onblur="this.placeholder='...'"></textarea>
+				<div id="contentblock">	
+					<div id="right">
+						<textarea id="mainTxtInput" type="text" wrap="soft" placeholder="..." onfocus="this.placeholder=''" onblur="this.placeholder='...'"></textarea>
+					</div>
 				</div>
+
+				<button id="envoyer">CHAT ⏎</button>
+				<button class="removeAll">ERASE CHAT</button>
+
 			</div>
+		</div>
 
-			<button id="envoyer">CHAT ⏎</button>
-			<button class="removeAll">ERASE CHAT</button>
+		<div id="formINSTRUCTIONS">
+			<textarea id="instructionsInput" type="text" wrap="soft"></textarea>
+		</div>
 
+		<button id="envoyerINSTRUCTIONS">INSTRUCTION ⏎</button>
+
+		<button class="tas">TAS1</button>
+		<button class="tas">TAS2</button>
+		<button class="tas">TAS3</button>
+		<button class="tas">TAS4</button>
+
+		<br/>
+		
+		<button class="tas">TAROT1</button>
+		<button class="tas">TAROT2</button>
+		<button class="tas">TAROT3</button>
+		<button class="tas" id="DESACTIVAY">DESACTIVAY</button>
+
+		 {{#each ViewSwitchers}}
+		<label class="container"> {{name}}
+		<input type="checkbox" class="viewSwitcher" id={{name}} checked={{activated}}> <!-- là faut du meteor -->
+		<span class="checkmark"></span>
+		</label>
+		{{/each}}
+
+		<div>
+			heure de rendez-vous? (entrez zéro "0" pour effacer)
+			<input type="text" name="timeRDV" id="timeRDV" value={{currentRDV}}>
 		</div>
 	</div>
-
-	<div id="formINSTRUCTIONS">
-		<textarea id="instructionsInput" type="text" wrap="soft"></textarea>
-	</div>
-
-	<button id="envoyerINSTRUCTIONS">INSTRUCTION ⏎</button>
-
-	<button class="tas">TAS1</button>
-	<button class="tas">TAS2</button>
-	<button class="tas">TAS3</button>
-	<button class="tas">TAS4</button>
-	<br/>
-	<button class="tas">TAROT1</button>
-	<button class="tas">TAROT2</button>
-	<button class="tas">TAROT3</button>
-	<button class="tas" id="DESACTIVAY">DESACTIVAY</button>
-
-	 {{#each ViewSwitchers}}
-	<label class="container"> {{name}}
-	<input type="checkbox" class="viewSwitcher" id={{name}} checked={{activated}}> <!-- là faut du meteor -->
-	<span class="checkmark"></span>
-	</label>
-	{{/each}}
-
-	<div>
-		heure de rendez-vous? (entrez zéro "0" pour effacer)
-	<input type="text" name="timeRDV" id="timeRDV" value={{currentRDV}}>
-	</div>
-</div>
 
 
 </template>

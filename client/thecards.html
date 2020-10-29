@@ -1,0 +1,48 @@
+<template name="thecards">
+  <div id="container">
+    <table class="table table-condensed table-striped table-hover">
+      <thead>
+          <tr>
+              <th>Deck</th>
+              <th>Text</th>
+              <th>Logo</th>
+              <th>Index</th>
+              <th>X</th>
+          </tr>
+      </thead>
+      <tbody>
+        {{#each listCards}}
+          {{#if editing}}
+          <tr>
+            <td><input type="text" id="editItemDeck" value="{{deck}}"><br /></td>
+            <td><input type="text" id="editItemText" value="{{text}}"></td>
+            <td><input type="text" id="editItemLogo" class="hihi" value="{{logo}}"></td>
+            <td><input type="text" id="editItemIndex" value="{{index}}"></td>
+            <td>
+              <button class="saveItem">save</button>
+              <button class="cancelItem">Cancel</button>
+            </td>
+          </tr>
+          {{else}}
+          <tr>
+              <td>{{deck}}<br /></td>
+              <td>{{text}}</td>
+              <td class="hihi">{{logo}}</td>
+              <td>{{index}}</td>
+              <td><button class="editItem">Edit</button>{{> quickRemoveButton collection="TheCards" _id=this._id onError=quickRemoveButtonOnError onSuccess=quickRemoveButtonOnSuccess beforeRemove=quickRemoveButtonBeforeRemove class="btn btn-danger"}}</td>
+          </tr>
+          {{/if}}
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <tr>
+            <td><label for="TheCardDeck">Deck :</label><input name="name" id="TheCardDeck" /></td>
+            <td><label for="TheCardText">Text :</label><input name="location" id="TheCardText" /></td>
+            <td><label for="TheCardIndex">Logo :</label><input name="location" id="TheCardLogo" class="hihi" /></td>
+            <td><label for="TheCardIndex">Index :</label><input name="location" id="TheCardIndex" /></td>
+            <td><button class="btn btn-primary" type="button" id="addCard">Ajouter</button></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</template>
