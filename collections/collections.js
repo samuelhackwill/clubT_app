@@ -1,13 +1,56 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
+TheCards = new Meteor.Collection('TheCards');
+TheSongs = new Meteor.Collection('TheSongs');
+TheChosenBits = new Meteor.Collection('TheChosenBits');
+
 TheDiscussion = new Meteor.Collection('TheDiscussion');
 TheInstructions = new Meteor.Collection('TheInstructions');
 TheIds = new Meteor.Collection("TheIds")
+
 CardTime = new Meteor.Collection("CardTime")
 ViewSwitcher = new Meteor.Collection("ViewSwitcher")
 GlobalVars = new Meteor.Collection("GlobalVars")
 
 var Schemas = {};
+
+Schemas.TheCards = new SimpleSchema({
+	"text":{
+		type:String
+		// max : 800
+		// max text for a card ?
+	},
+
+	"logo":{
+		type:String,
+	},
+
+	"tas":{
+		type:Number,
+		optional:false
+	},
+
+	"index":{
+		type:Number,
+		optional:false
+	},
+})
+
+Schemas.TheSongs = new SimpleSchema({
+	"title":{
+		type:String
+	},
+
+	"text":{
+		type:String
+	}
+})
+
+Schemas.TheChosenBits = new SimpleSchema({
+	"text":{
+		type:String
+	}
+})
 
 Schemas.GlobalVars = new SimpleSchema({
 	"name":{
@@ -79,7 +122,9 @@ Schemas.TheIds = new SimpleSchema({
 
 });
 
-
+TheCards.attachSchema(Schemas.TheCards);
+TheSongs.attachSchema(Schemas.TheSongs);
+TheChosenBits.attachSchema(Schemas.TheChosenBits);
 TheDiscussion.attachSchema(Schemas.TheDiscussion);
 TheInstructions.attachSchema(Schemas.TheInstructions);
 TheIds.attachSchema(Schemas.TheIds);
