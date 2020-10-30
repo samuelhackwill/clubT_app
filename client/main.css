@@ -54,6 +54,62 @@ svg{
 	height:100%;
 }
 
+.overflowing{
+	overflow: scroll !important;
+}
+
+.tasDeCartes{
+	position: absolute;
+
+	right:20px;
+	bottom:0px;
+	transform: translateY(-50%);
+
+	height:250px;
+	width:180px;
+
+	background-color:gold;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 10px;
+	display: none;
+	justify-content: center;
+	align-items: center; 
+
+	font-size: 50px;
+
+	box-shadow: 2px 2px #888888;
+
+	cursor: pointer;
+}
+
+.card{
+	position: absolute;
+
+	height:250px;
+	width:180px;
+	background-color:white;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+
+	display: none;
+}
+
+.cardText{
+	text-align: center;
+	padding: 10px;
+	transform: translate(0px,0px) !important;
+/*	wtf css
+*/}
+
+.cardLogo{
+	bottom:0px;
+}
+
 #firsthihi{
 	margin-left:4vw;
 }
@@ -63,6 +119,14 @@ svg{
 	font-family:VTFMisterPixel-Tools !important;
 }
 
+#warning{
+	position: fixed;
+	right:15px;
+	top:15px;
+
+	width: 400px;
+	color:grey;
+}
 
 #waitingScreen{
 	font-family:Avara_Black !important;
@@ -93,32 +157,6 @@ svg{
 	border-color:black;
 }
 
-.tas{
-	width:100px;
-	height:100px;
-}
-
-#tas1:hover{
-	cursor: pointer;
-	fill:blue;
-}
-#tas2:hover{
-	cursor: pointer;
-	fill:blue;
-}
-#tas3:hover{
-	cursor: pointer;
-	fill:blue;
-}
-#tas4:hover{
-	cursor: pointer;
-	fill:blue;
-}
-#tas5:hover{
-	cursor: pointer;
-	fill:blue;
-}
-
 .Mathilde{
 	background-color:chartreuse;
 	color:black;
@@ -136,8 +174,8 @@ body{
 	font-family: 'Avara-Bold',serif;
 	background-color: beige;
 	color:black;
-	overflow: hidden;
-}
+/*	overflow: hidden;
+*/}
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -214,6 +252,56 @@ transform: translate(0%,-50%);
 
 #audioFile{
 	display:none;
+}
+
+.composeLine{
+	font-size:18px;
+	width: 100%;
+}
+.composeTitle{
+	font-size:28px;
+	width: 100%;
+	font-style: bold;
+}
+
+.composeTitle::placeholder{
+	color:lightgrey;
+}
+
+#starWars{
+	padding-top:100vh;
+	padding-bottom: 100vh;
+	top: 100vh;
+	color:white;
+	transition:transform 60s linear;
+	transform: translateY(0px);
+	width: 100%;
+	position: absolute;
+	background-color:black;
+	left: 0px;
+}
+
+.poesis{
+	font-size:30px;
+	margin-left:200px;
+	height:50px;
+}
+
+.poesisTitle{
+	margin-top: 300px;
+	margin-bottom: 100px;
+	text-align: center;
+	font-size: 40px;
+}
+
+#left{
+	width: 600px;
+}
+
+#right{
+	position: absolute;
+	right:0px;
+	width:45%;
 }
 
 #leftColumn{

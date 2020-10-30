@@ -36,6 +36,14 @@ Meteor.startup(function(){
 });
 
 if (Meteor.isServer) {
+
+  Meteor.publish("TheChosenBits", function(){
+    return TheChosenBits.find();
+  });
+  
+  Meteor.publish("TheSongs", function(){
+    return TheSongs.find();
+  });
   
   Meteor.publish('allTheCards', function() {
     return TheCards.find();

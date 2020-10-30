@@ -17,7 +17,7 @@ Template.thecards.onRendered(function(){
 
 Template.thecards.helpers({
 	listCards : function(){
-		return TheCards.find({});
+		return TheCards.find({},{sort: {deck:1,index:1}});
 	},
 
 	editing: function(){

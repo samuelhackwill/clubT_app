@@ -7,11 +7,9 @@ import './main.html';
 import jsCookie from 'js-Cookie';
 import moment from 'moment/min/moment-with-locales.min.js';
 
-tas1count = 1
-tas2count = 1
-tas3count = 1
-tas4count = 1
-tas5count = 1
+cardsAlreadyPlayed = 0
+cardIndex = 1
+deckcount = 1
 
 currentDurLong = 0
 currentDurShort = ''
@@ -54,28 +52,44 @@ qqquery.observeChanges({
 var queryy = CardTime.find();
 queryy.observeChanges({
 	changed(id,fields){
-		setTimeout(function(){
-		console.log("HEY ITS CARD TIME bruh!")
-		console.log(id, fields.activated)
+		if (Router.current().route.getName()=="show") {
+			setTimeout(function(){
+			console.log("HEY ITS CARD TIME bruh!")
+			console.log(id, fields.activated)
 
-		if(fields.activated=="tarot1"){
-			pointsdevie++
-			document.getElementById("tas").style.display="none"
-			document.getElementById("tas1PLAYD").style.display="none"
-			document.getElementById("tas2PLAYD").style.display="none"
-			document.getElementById("tas3PLAYD").style.display="none"
-			document.getElementById("tas4PLAYD").style.display="none"
-			document.getElementById("tarot").style.display="block"
+			if(fields.activated=="tasE"){
+				//"hidE all tas"
+				document.getElementById("tas").style.display="none"
+				return
+			}else{
+				document.getElementById("tas").style.display="flex"
+			}
 
-		}
-		if(fields.activated=="tarot2"){
-			pointsdevie++
-		}
-		if(fields.activated=="tarot3"){
-			pointsdevie++
-		}
+			cardsAlreadyPlayed = 0
+			cardIndex = 1
+			// hum si on change le deck pendant que quelqu'un était 
+			// en train de jouer il faut remettre à zéro son compte de cards already
+			// played.
 
-	},20)
+			// if(fields.activated=="tarot1"){
+			// 	pointsdevie++
+			// 	document.getElementById("tas").style.display="none"
+			// 	document.getElementById("tas1PLAYD").style.display="none"
+			// 	document.getElementById("tas2PLAYD").style.display="none"
+			// 	document.getElementById("tas3PLAYD").style.display="none"
+			// 	document.getElementById("tas4PLAYD").style.display="none"
+			// 	document.getElementById("tarot").style.display="block"
+
+			// }
+			// if(fields.activated=="tarot2"){
+			// 	pointsdevie++
+			// }
+			// if(fields.activated=="tarot3"){
+			// 	pointsdevie++
+			// }
+
+		},20)
+		}
 	}
 })
 
@@ -92,6 +106,9 @@ Template.content.onCreated(function() {
 	moment.locale('fr')
 	// shuffle(allAudio);
 	Meteor.subscribe("TheDiscussion");	
+	Meteor.subscribe("TheSongs");	
+	Meteor.subscribe("TheChosenBits");	
+    Meteor.subscribe('allTheCards');
 	Meteor.subscribe("TheInstructions");	
 	Meteor.subscribe("CardTime", {})
 
@@ -115,6 +132,24 @@ Template.content.onCreated(function() {
 
 Template.vueParticipant.onRendered(function(){
  document.body.style.opacity=1
+
+ setTimeout(function(){
+ 	console.log("MOVING CARDS & checking cartime")
+ 	allthecards = document.getElementsByClassName("card")
+ 	for(i=0; i<allthecards.length; i++){
+ 		allthecards[i].style="transform:translate("+(Math.floor(Math.random() * 400) + 100)+"px, "+(Math.floor(Math.random() * 200) + 1)+"px) rotate("+Math.ceil(Math.random() * 7) * (Math.round(Math.random()) ? 1 : -1)+"deg);"
+ 	}
+ 	
+ 	if (CardTime.findOne().activated.substring(3)=="E") {
+ 		return
+ 	}else{
+ 		document.getElementById("tas").style.display="flex"
+ 	}
+
+	// prend ton temps pour ranger les cartes mon frèr
+
+ },4000)
+
 });
 
 Template.loading.onRendered(function(){
@@ -140,39 +175,43 @@ Template.content.onRendered(function yo(){
 
 console.log("onrendered fired")
 
-	aud = document.getElementById("audioFile");
-	aud.src = allAudio[0]+"math.mp3"
-	aud.load()
-	allAudio.splice(0,1)
+	// aud = document.getElementById("audioFile");
+	// aud.src = allAudio[0]+"math.mp3"
+	// aud.load()
+	// allAudio.splice(0,1)
 
-	aud.onended = function() {
+	// aud.onended = function() {
 		
-		if(allAudio[0]){
-			aud.src = allAudio[0]+"math.mp3"
-			aud.load()
-			allAudio.splice(0,1)
-		}else{
-			showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
-			aud.src = ""
-			aud.load()
-		}
-	}; 
+	// 	if(allAudio[0]){
+	// 		aud.src = allAudio[0]+"math.mp3"
+	// 		aud.load()
+	// 		allAudio.splice(0,1)
+	// 	}else{
+	// 		showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
+	// 		aud.src = ""
+	// 		aud.load()
+	// 	}
+	// }; 
 
-	aud.onpause = function() {
+	// aud.onpause = function() {
 
-		if(allAudio[0]){
-			aud.src = allAudio[0]+"math.mp3"
-			aud.load()
-			allAudio.splice(0,1)
-		}else{
-			showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
-			aud.src = ""
-			aud.load()
-		}
-	}; 
+	// 	if(allAudio[0]){
+	// 		aud.src = allAudio[0]+"math.mp3"
+	// 		aud.load()
+	// 		allAudio.splice(0,1)
+	// 	}else{
+	// 		showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
+	// 		aud.src = ""
+	// 		aud.load()
+	// 	}
+	// }; 
 })
 
 Template.waiting.helpers({
+	listCards : function(){
+		return TheCards.find({});
+	},
+
 	RDV:function(){
 		if (GlobalVars.findOne({"name":"RDV"})===undefined || GlobalVars.findOne({"name":"RDV"}).value=="0") {
 			return
@@ -185,15 +224,21 @@ Template.waiting.helpers({
 
 Template.instructions.helpers({
 	instruction:function(){
-		return "Mathilde : "+TheInstructions.find({}).fetch()[0].content
+		if (TheInstructions.find({}).fetch()[0]==undefined) {
+			return ""
+		}else{
+			return "Mathilde : "+TheInstructions.find({}).fetch()[0].content	
+		}
 	}
 })
 
 Template.content.helpers({
 	line:function(){
-		// console.log("new line fetched")
-		// montre moi les posts de MOI MEME, ou un des admins.
-		return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Nicole']}});
+		if (TheDiscussion.find({}).fetch()[0]==undefined) {
+			return ""
+		}else{		
+			return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Nicole']}});
+		}
 	},
 
 	checkAdmin:function(){
@@ -236,6 +281,30 @@ Template.form.helpers({
 	}
 })
 
+Template.vueParticipant.helpers({
+	getSongs : function(){
+		now = new Date()
+		nowD = now.getDate()
+		nowM = now.getMonth()
+		nowY = now.getFullYear()
+
+		_date = nowD+"/"+nowM+"/"+nowY
+
+		return TheSongs.find({date:_date})
+
+	},
+
+	currentDeckLogo : function(){
+		deckcount = parseInt(CardTime.findOne().activated.substring(3))
+		return TheCards.findOne({deck:deckcount}).logo
+	},
+
+	listCards : function(){
+		return TheCards.find({},{sort: {deck:1, index:1}});
+	},
+
+});
+
 Template.vueParticipant.events({
 	'click .tarotc' : function(e){
 
@@ -258,80 +327,23 @@ Template.vueParticipant.events({
 }
 	},
 
-	'click .tas' : function(e){
-		console.log(e.currentTarget)
+	'click .tasDeCartes' : function(){
+		// cardsAlreadyPlayed : il revient à 0 à la fin de chaque tas.
+		// cardIndex : revient à 1 à la fin de chaque tas.
+		// deckcount : est modifié par l'admin (collection CardTime).
+		deckcount = parseInt(CardTime.findOne().activated.substring(3))
+		// 1, 2, 3, 4, E
 
-		switch(e.currentTarget.id){
-			case "tas1" :
+		console.log("click on tas de cartes, fetching deck ", deckcount, ", card ", cardIndex, " and ", cardsAlreadyPlayed, " already played.")
 			
-			if(CardTime.findOne().activated=="tas1"){
-				if(tas1count <document.getElementById("tas1PLAYD").childElementCount){
-					document.getElementById("card1."+tas1count).style.display="initial"
-				}else{
-					document.getElementById("card1."+tas1count).style.display="initial"
-					document.getElementById("tas1").style.display="none"
-				}
-				tas1count ++
+			if(cardsAlreadyPlayed < TheCards.find({"deck":deckcount}).fetch().length-1){
+				document.getElementById("card"+deckcount+"."+cardIndex).style.display="flex"
+				cardsAlreadyPlayed ++
+			}else{
+				document.getElementById("card"+deckcount+"."+cardIndex).style.display="flex"
+				document.getElementById("tas").style.display="none"
 			}
-
-			break;
-			case "tas2" :
-			
-			if(CardTime.findOne().activated=="tas2"){
-				if(tas2count<document.getElementById("tas2PLAYD").childElementCount){
-					document.getElementById("card2."+tas2count).style.display="initial"
-				}else{
-					document.getElementById("card2."+tas2count).style.display="initial"
-					document.getElementById("tas2").style.display="none"
-				}
-				tas2count ++
-			}
-
-			break;
-			case "tas3" :
-			
-			if(CardTime.findOne().activated=="tas3"){
-				if(tas3count <document.getElementById("tas3PLAYD").childElementCount){
-					document.getElementById("card3."+tas3count).style.display="initial"
-				}else{
-					document.getElementById("card3."+tas3count).style.display="initial"
-					document.getElementById("tas3").style.display="none"
-				}
-				tas3count ++
-			}
-
-			break;
-			case "tas4" :
-			
-			if(CardTime.findOne().activated=="tas4"){
-				if(tas4count <document.getElementById("tas4PLAYD").childElementCount){
-					document.getElementById("card4."+tas4count).style.display="initial"
-				}else{
-					document.getElementById("card4."+tas4count).style.display="initial"
-					document.getElementById("tas4").style.display="none"
-				}
-				tas4count ++
-			}
-
-			break;
-			case "tas5" :
-			
-			if(CardTime.findOne().activated=="tas5"){
-				if(tas5count <document.getElementById("tas5PLAYD").childElementCount){
-					document.getElementById("card5."+tas5count).style.display="initial"
-				}else{
-					document.getElementById("card5."+tas5count).style.display="initial"
-					document.getElementById("tas5").style.display="none"
-				}
-				tas5count ++
-			}
-
-			break;
-
-
-
-
-		}
+			cardIndex ++
 	}
 })
 

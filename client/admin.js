@@ -31,6 +31,7 @@ Template.vueAdmin.onCreated(function() {
 	Meteor.subscribe("TheInstructions");
 	Meteor.subscribe("TheDiscussion");
 	Meteor.subscribe("GlobalVars");
+	Meteor.subscribe("allTheCards")
 
 });
 
@@ -46,6 +47,10 @@ Template.vueAdmin.onRendered(function yo(){
 });
 
 Template.vueAdmin.helpers({
+	getDecks:function(){
+		return TheCards.find({index:1})
+	},
+
 	currentRDV:function(){
 		return GlobalVars.findOne({"name":"RDV"}).value
 	},

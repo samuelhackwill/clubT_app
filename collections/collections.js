@@ -42,8 +42,14 @@ Schemas.TheSongs = new SimpleSchema({
 	},
 
 	"text":{
+		type:[String],
+		trim:false
+	},
+
+	"date":{
 		type:String
 	}
+
 })
 
 Schemas.TheChosenBits = new SimpleSchema({
@@ -131,7 +137,21 @@ TheIds.attachSchema(Schemas.TheIds);
 ViewSwitcher.attachSchema(Schemas.ViewSwitcher);
 GlobalVars.attachSchema(Schemas.GlobalVars);
 
+
+
 TheCards.allow({
+  insert: function (){
+    return true; 
+  },
+  update: function () { 
+    return true; 
+  },
+  remove: function () {
+    return true; 
+  }
+})
+
+TheSongs.allow({
   insert: function (){
     return true; 
   },

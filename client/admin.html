@@ -33,17 +33,19 @@
 
 		<button id="envoyerINSTRUCTIONS">INSTRUCTION ⏎</button>
 
-		<button class="tas">TAS1</button>
-		<button class="tas">TAS2</button>
-		<button class="tas">TAS3</button>
-		<button class="tas">TAS4</button>
+		{{#each getDecks}}
+
+		<button class="tas">TAS{{deck}}</button>
+
+		{{/each}}
 
 		<br/>
-		
+		<!-- 
 		<button class="tas">TAROT1</button>
 		<button class="tas">TAROT2</button>
 		<button class="tas">TAROT3</button>
-		<button class="tas" id="DESACTIVAY">DESACTIVAY</button>
+		 -->
+		<button class="tas" id="DESACTIVAY">HIDE ALL TAS</button>
 
 		 {{#each ViewSwitchers}}
 		<label class="container"> {{name}}
