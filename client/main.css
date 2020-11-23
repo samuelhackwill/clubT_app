@@ -54,8 +54,218 @@ svg{
 	height:100%;
 }
 
+.clickable{
+	cursor: pointer;
+}
+
+.clickable:hover{
+	color:blue;
+}
+
+.clicked{
+	color:green;
+}
+
 .overflowing{
 	overflow: scroll !important;
+}
+
+.tarotPlayedCard{
+	height: 25vw;
+	width: 18vw;
+	background-color: white;
+
+	border-radius: 1vw;
+}
+
+#tpc1{
+	opacity: 0;
+	transition: opacity 3s;
+
+	position: absolute;
+	bottom: 130px;
+	left:38vw;
+
+	z-index: -1000;
+
+	background-size: cover; 
+	background-position: center;
+}
+#tpc2{
+	opacity: 0;
+	transition: opacity 3s;
+
+	position: absolute;
+	bottom: 130px;
+	left:58vw;
+
+	z-index: -1000;
+
+	background-size: cover; 
+	background-position: center;
+}
+#tpc3{
+	opacity: 0;
+	transition: opacity 3s;
+
+	position: absolute;
+	bottom: 130px;
+	left:78vw;
+
+	z-index: -1000;
+
+	background-size: cover; 
+	background-position: center;
+
+}
+
+.tasdeTarot{
+	opacity: 1;
+	transition: opacity 1s;
+	position: absolute;
+	bottom: 20px;
+	right:50%;
+}
+
+.cartedeTarot{
+	height: 320px;
+	width: 230px;
+
+	background-color: red;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 17px;
+
+	box-shadow: 2px 2px white;
+}
+
+.cartedeTarot:nth-child(1){
+	position: absolute;
+	bottom:50px;
+	left: -180px;
+	display:none;
+	transform: rotate(-32deg);
+}
+
+.cartedeTarot:nth-child(2){
+	position: absolute;
+	bottom:50px;
+	left: -140px;
+	display:none;
+	transform: rotate(-28deg);
+
+}
+
+.cartedeTarot:nth-child(3){
+	position: absolute;
+	bottom:50px;
+	left: -100px;
+	display:none;
+	transform: rotate(-24deg);
+}
+
+.cartedeTarot:nth-child(4){
+	position: absolute;
+	bottom:50px;
+	left: -60px;
+	display:none;
+	transform: rotate(-22deg);
+}
+
+.cartedeTarot:nth-child(5){
+	position: absolute;
+	bottom:50px;
+	left: -20px;
+	display:none;
+	transform: rotate(-18deg);
+}
+
+.cartedeTarot:nth-child(6){
+	position: absolute;
+	bottom:50px;
+	left: 20px;
+	display:none;
+	transform: rotate(-14deg);
+}
+
+.cartedeTarot:nth-child(7){
+	position: absolute;
+	bottom:50px;
+	left: 60px;
+	display:none;
+	transform: rotate(-10deg);
+}
+
+.cartedeTarot:nth-child(8){
+	position: absolute;
+	bottom:50px;
+	left: 100px;
+	display:none;
+	transform: rotate(-6deg);
+}
+
+.cartedeTarot:nth-child(9){
+	position: absolute;
+	bottom:50px;
+	left: 140px;
+	display:none;
+	transform: rotate(0deg);
+}
+
+.cartedeTarot:nth-child(10){
+	position: absolute;
+	bottom:50px;
+	left: 180px;
+	display:none;
+	transform: rotate(4deg);
+}
+
+.cartedeTarot:nth-child(11){
+	position: absolute;
+	bottom:50px;
+	left: 220px;
+	display:none;
+	transform: rotate(8deg);
+}
+
+.cartedeTarot:nth-child(12){
+	position: absolute;
+	bottom:50px;
+	left: 260px;
+	display:none;
+	transform: rotate(12deg);
+}
+
+.cartedeTarot:nth-child(13){
+	position: absolute;
+	bottom:50px;
+	left: 300px;
+	display:none;
+	transform: rotate(16deg);
+}
+
+.cartedeTarot:nth-child(14){
+	position: absolute;
+	bottom:50px;
+	left: 340px;
+	display:none;
+	transform: rotate(20deg);
+}
+
+.cartedeTarot:nth-child(15){
+	position: absolute;
+	bottom:50px;
+	left: 380px;
+	display:none;
+	transform: rotate(24deg);
+}
+
+.cartedeTarot:nth-child(16){
+	position: absolute;
+	bottom:50px;
+	left: 420px;
+	display:none;
+	transform: rotate(28deg);
 }
 
 .tasDeCartes{
@@ -81,6 +291,10 @@ svg{
 	box-shadow: 2px 2px #888888;
 
 	cursor: pointer;
+}
+
+.tasDeCartes:hover{
+	opacity: .8;
 }
 
 .card{
@@ -130,7 +344,7 @@ svg{
 
 #waitingScreen{
 	font-family:Avara_Black !important;
-	font-size:2vw;
+	font-size:1.7vw;
 	width:66vw;
 	margin-top:2vw;
 	margin-left:2vw;
@@ -174,8 +388,8 @@ body{
 	font-family: 'Avara-Bold',serif;
 	background-color: beige;
 	color:black;
-/*	overflow: hidden;
-*/}
+	overflow: hidden;
+}
 
 ::-webkit-scrollbar {
     width: 0px;
@@ -187,8 +401,8 @@ body{
 	height:98vh;
 
 	display: grid;
-	grid-template-columns: 16.66%16.66%10.66%16.66%16.66%16.66%;
-	grid-template-rows: 25% 25% 25% 25%;
+	grid-template-columns: 16.66%16.66%16.66%16.66%16.66%16.66%;
+	grid-template-rows: 16.66%16.66%16.66%16.66%16.66%16.66%;
 }
 
 #phylactereContainer{
@@ -209,8 +423,8 @@ body{
 transform: translate(0%,-50%);
 }
 
-.tarotc:hover{
-	fill:white;
+.cartedeTarot:hover{
+	background-color:white;
 	cursor: pointer;
 }
 
@@ -268,12 +482,24 @@ transform: translate(0%,-50%);
 	color:lightgrey;
 }
 
+.radioPlayer{
+	background-color: black;
+	color:white;
+	position: relative;
+	bottom:0px;
+	z-index: 10000;
+	width: 50%;
+	left:50%;
+	transform: translateX(-50%);
+	margin-top:100px;
+	margin-bottom:100px;
+
+}
+
 #starWars{
-	padding-top:100vh;
-	padding-bottom: 100vh;
 	top: 100vh;
 	color:white;
-	transition:transform 60s linear;
+	transition:transform 120s linear;
 	transform: translateY(0px);
 	width: 100%;
 	position: absolute;
@@ -313,8 +539,8 @@ transform: translate(0%,-50%);
 	grid-row-end: span 4;
 }
 
-#mithildeMug{
-	background-image: url("mithidBD.png");
+#conseillere{
+	background-image: url("/mugshots/mathilde.png");
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -326,25 +552,67 @@ transform: translate(0%,-50%);
 	grid-column-end:span 1;
 }
 
-#mithildeAnimated{
+#conseillereA{
 	opacity: 0;
-	background-image: url("mithidBD2.png");
-	background-size: contain;
-	background-position: center;
-	background-repeat: no-repeat;
-
 	grid-row-start: 1;
 	grid-row-end: span 1;
 
 	grid-column-start:3;
 	grid-column-end:span 1;
-
-	animation: blabla .3s infinite linear;
 }
 
-@keyframes blabla {
- 0%, 100%{background-image: url("mithidBD.png");}
- 50%{background-image: url("mithidBD2.png");}
+
+.mathildeA{
+	background-image: url("mugshots/mathildeA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaM .3s infinite linear;
+}
+
+@keyframes blablaM {
+ 0%, 100%{background-image: url("mugshots/mathilde.png");}
+ 50%{background-image: url("mugshots/mathildeA.png");}
+}
+
+.samuelA{
+	background-image: url("mugshots/samuelA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaS .3s infinite linear;
+}
+
+@keyframes blablaS {
+ 0%, 100%{background-image: url("mugshots/samuel.png");}
+ 50%{background-image: url("mugshots/samuelA.png");}
+}
+
+.thibautA{
+	background-image: url("mugshots/thibautA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaT .3s infinite linear;
+}
+
+@keyframes blablaT {
+ 0%, 100%{background-image: url("mugshots/thibaut.png");}
+ 50%{background-image: url("mugshots/thibautA.png");}
+}
+
+
+.valerieA{
+	background-image: url("mugshots/valerieA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaV .3s infinite linear;
+}
+
+@keyframes blablaV {
+ 0%, 100%{background-image: url("mugshots/valerie.png");}
+ 50%{background-image: url("mugshots/valerieA.png");}
 }
 
 

@@ -4,19 +4,8 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'
 import '/imports/methods';
 import './main.html';
-import jsCookie from 'js-Cookie';
+// import jsCookie from 'js-Cookie';
 import moment from 'moment/min/moment-with-locales.min.js';
-
-
-// var query = TheDiscussion.find();
-// query.observeChanges({
-// 	added:function(){
-// 		setTimeout(function(){
-// 		Meteor.call("scrollDiv")
-
-// 	},20)
-// 	}
-// })
 
 
 Template.registerHelper('formatedDate', function(timestamp) {
@@ -92,6 +81,12 @@ Template.vueAdmin.events({
 	    fetched = ViewSwitcher.find({}).fetch()
 
 	    // you know what? can't be arsed
+	    if (e.target.id==="waiting") {
+	    	// reset the phase to phase 1 (messages aren't broadcasted to everyone.)
+	    	GlobalVars.update(GlobalVars.find({"name":"phase"}).fetch()[0]._id, {$set:{"value":"1"}})
+	    	GlobalVars.update(GlobalVars.find({"name":"clickable"}).fetch()[0]._id, {$set:{"value":"1"}})
+	    	GlobalVars.update(GlobalVars.find({"name":"end"}).fetch()[0]._id, {$set:{"value":"1"}})
+	    }
 
 	    for(i=fetched.length-1; i>-1; i--){
 	    // uncheck all the other checkboxes
@@ -108,6 +103,22 @@ Template.vueAdmin.events({
 		pushTxt();
 		document.getElementById("mainTxtInput").focus()
 	},	
+
+	'click #ToggleEveryone' : function(){
+    	GlobalVars.update(GlobalVars.find({"name":"phase"}).fetch()[0]._id, {$set:{"value":"2"}})
+	},
+
+	'click #ToggleSolo' : function(){
+    	GlobalVars.update(GlobalVars.find({"name":"phase"}).fetch()[0]._id, {$set:{"value":"1"}})
+	},
+
+	'click #ToggleClickable' : function(){
+    	GlobalVars.update(GlobalVars.find({"name":"clickable"}).fetch()[0]._id, {$set:{"value":"2"}})
+	},
+
+	'click #End' : function(){
+    	GlobalVars.update(GlobalVars.find({"name":"end"}).fetch()[0]._id, {$set:{"value":"2"}})
+	},
 
 	'click .tas' : function(e){
 		console.log(e.target.innerHTML)

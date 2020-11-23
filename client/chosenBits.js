@@ -9,6 +9,7 @@ Template.chosenBits.onCreated(function() {
 	console.log("chosenBits")
     Meteor.subscribe('TheChosenBits');
     Meteor.subscribe('TheSongs');
+    Meteor.subscribe('TheArchive');
 })
 
 Template.chosenBits.onRendered(function(){
@@ -23,6 +24,23 @@ Template.chosenBits.helpers({
 
 Template.chosenBits.events({
 
+	"click #archive" : function(){
+
+		_now = new Date()
+
+		for (var i = TheChosenBits.find({}).fetch().length - 1; i >= 0; i--){
+			obj = TheChosenBits.find({}).fetch()[i]
+			obj.timestamp = _now
+			TheArchive.insert({obj})
+			TheChosenBits.remove({_id:obj._id})
+		}
+
+	},
+
+	"click #delete" : function(){
+		Meteor.call("deleteFromChosenBits")
+	},
+
 	"click #sendPoesie" : function(){
 
 		// get the lines
@@ -36,7 +54,9 @@ Template.chosenBits.events({
 		_title = document.getElementById("composeTitle").value
 		linesArray = []
 		for (var i = 0; i < document.getElementsByClassName("composeLine").length-1; i++) {
+			console.log("looks like this before push ", document.getElementsByClassName("composeLine")[i].value)
 			linesArray.push(document.getElementsByClassName("composeLine")[i].value)
+			console.log("looks like this after push ", linesArray[linesArray.length-1])
 		}
 
 		// sanitize unwanted empty lines at the end

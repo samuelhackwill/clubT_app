@@ -3,15 +3,16 @@
 </head>
 
 <template name="vueParticipant">
+	<audio style="display:none;" id="audioFile"></audio>
 	<div id="container"> 
 		<div id="leftColumn">
 			{{> content}}
 			{{> form}}
 		</div>
 
-		<div id="mithildeMug">
+		<div id="conseillere">
 		</div>
-		<div id="mithildeAnimated">
+		<div id="conseillereA">
 			
 		</div>
 
@@ -33,6 +34,31 @@
 		<div class="tasDeCartes" id="tas">
 			<div class="tasDeCartesText hihi">{{currentDeckLogo}}</div>
 		</div>
+
+		<div class="tasdeTarot" id="tasdeTarot">
+			<div class="cartedeTarot" id="tarot1"></div>
+			<div class="cartedeTarot" id="tarot2"></div>
+			<div class="cartedeTarot" id="tarot3"></div>
+			<div class="cartedeTarot" id="tarot4"></div>
+			<div class="cartedeTarot" id="tarot5"></div>
+			<div class="cartedeTarot" id="tarot6"></div>
+			<div class="cartedeTarot" id="tarot7"></div>
+			<div class="cartedeTarot" id="tarot8"></div>
+			<div class="cartedeTarot" id="tarot9"></div>
+			<div class="cartedeTarot" id="tarot10"></div>
+			<div class="cartedeTarot" id="tarot11"></div>
+			<div class="cartedeTarot" id="tarot12"></div>
+			<div class="cartedeTarot" id="tarot13"></div>
+			<div class="cartedeTarot" id="tarot14"></div>
+			<div class="cartedeTarot" id="tarot15"></div>
+			<div class="cartedeTarot" id="tarot16"></div>
+		</div>
+
+		<div class="tarotPlayed">
+			<div class="tarotPlayedCard" id="tpc1"></div>
+			<div class="tarotPlayedCard" id="tpc2"></div>
+			<div class="tarotPlayedCard" id="tpc3"></div>
+		</div>
 	
 	</div>
 
@@ -43,6 +69,13 @@
 			<div class="poesis">{{this}}</div>
 			{{/each}}
 		{{/each}}
+		<div class="radioPlayer">
+			
+		Nous arrivons à la fin de cette expérience ! <br/>
+		Nous vous remercions de votre participation à cette expérience d’aujourd’hui ! 
+		Bravo et merci d'être resté.e.s jusqu'au bout! Et maintenant pour celles.ceux qui veulent rester encore un peu on vous propose de nous rejoindre <a href="http://shh.ovh/radio_la_peinture">ici</a>. (On va discuter deux minutes avec Mathilde et Samuel par voie sonore, et vous pourrez nous parler via un chat si vous le souhaitez).
+
+		</div>
 	</div>
 
 </template>
@@ -55,15 +88,9 @@
 	<div id="content">
 		{{#each line}}
 		<div id="contentblock">
-			{{#if checkAdmin}}
 			<div id="l">
+				<span id="author" class="lowKey">{{checkAdmin}}</span>
 			</div>
-			{{else}}
-			<div id="l">
-				<span id="author" class="lowKey">vous :</span>
-			</div>
-			{{/if}}
-
 			<div id="r"><span id="actualContent" class={{author}}> {{content}}</span>
 			</div>
 		</div>

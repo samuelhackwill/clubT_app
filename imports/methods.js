@@ -2,6 +2,11 @@ import { Meteor } from 'meteor/meteor';
 
 Meteor.methods({
 
+	deleteFromChosenBits : function(){
+		TheChosenBits.remove({})
+		TheSongs.remove({})
+	},
+
 	changeCardTime : function(obj){
 		console.log("CHANGE CARD TIME !", obj)	
 
@@ -28,32 +33,23 @@ Meteor.methods({
 		// 	TheDiscussion.remove({})
 		// }else{
 
-			TheInstructions.update(TheInstructions.find({}).fetch()[0]._id, {$set:{"content":obj.message}})
+			TheInstructions.update(TheInstructions.find({}).fetch()[0]._id, {$set:{"author":obj._author, "content":obj.message}})
 
 			console.log("new instruction, ", obj.message)
 			return(obj)
 		// }
-	},	
-
-	addIds : function(){
-		for(i=0;i<3000;i++){
-			TheIds.insert({theid:i})
-		}
 	},
 
 	eraseAll : function(){
 		TheDiscussion.remove({})
 		CardTime.remove({})
-		TheIds.remove({})
 	},
 
 	scrollDiv : function(){
 		if (Meteor.isClient) {
-			//console.log("le client ET le serveur sucent")
 			var objDiv = document.getElementById("content");
 			objDiv.scrollTop = objDiv.scrollHeight;	
 		}
 	}
-
 })
 

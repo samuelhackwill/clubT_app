@@ -3,10 +3,10 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 TheCards = new Meteor.Collection('TheCards');
 TheSongs = new Meteor.Collection('TheSongs');
 TheChosenBits = new Meteor.Collection('TheChosenBits');
+TheArchive = new Meteor.Collection('TheArchive');
 
 TheDiscussion = new Meteor.Collection('TheDiscussion');
 TheInstructions = new Meteor.Collection('TheInstructions');
-TheIds = new Meteor.Collection("TheIds")
 
 CardTime = new Meteor.Collection("CardTime")
 ViewSwitcher = new Meteor.Collection("ViewSwitcher")
@@ -110,20 +110,15 @@ Schemas.TheDiscussion = new SimpleSchema({
 });
 Schemas.TheInstructions = new SimpleSchema({
 
+	"author" : {
+	type : String,
+	label : "author",
+	},
+
 	"content" : {
 		type : String,
 		label : "content",
 		optional : true
-	}
-
-});
-
-Schemas.TheIds = new SimpleSchema({
-
-	"theid" : {
-		type : Number,
-		label : "theid",
-		optional : false
 	}
 
 });
@@ -133,13 +128,38 @@ TheSongs.attachSchema(Schemas.TheSongs);
 TheChosenBits.attachSchema(Schemas.TheChosenBits);
 TheDiscussion.attachSchema(Schemas.TheDiscussion);
 TheInstructions.attachSchema(Schemas.TheInstructions);
-TheIds.attachSchema(Schemas.TheIds);
 ViewSwitcher.attachSchema(Schemas.ViewSwitcher);
 GlobalVars.attachSchema(Schemas.GlobalVars);
 
 
 
 TheCards.allow({
+  insert: function (){
+    return true; 
+  },
+  update: function () { 
+    return true; 
+  },
+  remove: function () {
+    return true; 
+  }
+})
+
+
+TheChosenBits.allow({
+  insert: function (){
+    return true; 
+  },
+  update: function () { 
+    return true; 
+  },
+  remove: function () {
+    return true; 
+  }
+})
+
+
+TheArchive.allow({
   insert: function (){
     return true; 
   },

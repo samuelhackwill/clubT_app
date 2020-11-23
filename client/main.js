@@ -4,8 +4,11 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'
 import '/imports/methods';
 import './main.html';
-import jsCookie from 'js-Cookie';
+// import jsCookie from 'js-Cookie';
 import moment from 'moment/min/moment-with-locales.min.js';
+import { Random } from 'meteor/random'
+
+allTarotImgs = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 
 cardsAlreadyPlayed = 0
 cardIndex = 1
@@ -34,25 +37,77 @@ query.observeChanges({
 	}
 })
 
+var gVQuery = GlobalVars.find();
+gVQuery.observe({
+	changed:function(newDocument){
+		console.log("observe change", newDocument.name)
+
+		if(newDocument.name=="clickable"&&newDocument.value=="2"){
+			console.log("add class to everybody là")
+			allDivs = document.getElementsByClassName(Session.get("localId"))
+
+			for (var i = allDivs.length - 1; i >= 0; i--) {
+				allDivs[i].classList.add("clickable")
+			}
+		}
+
+		if(newDocument.name=="end"&&newDocument.value=="2"){
+			document.getElementById("starWars").style.transform = "translateY(-100%)"
+		}
+
+	}
+})
+
 var qqquery = TheInstructions.find();
 qqquery.observeChanges({
-	changed:function(){
+	changed:function(id, fields){
 
-		document.getElementById("mithildeMug").style.opacity="0"
-		document.getElementById("mithildeAnimated").style.opacity="1"
+		console.log(id, fields.author)
+
+		document.getElementById("conseillere").style.opacity="0"
+		document.getElementById("conseillereA").style.opacity="1"
+
+
+		if (fields.author=="Mathilde") {
+			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/mathilde.png')";
+			// la tête qui demeure.
+			document.getElementById("conseillereA").className = "";
+			document.getElementById("conseillereA").classList.add("mathildeA");
+			// pour l'animation.
+		}
+		if (fields.author=="Samuel") {
+			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/samuel.png')";
+
+			document.getElementById("conseillereA").className = "";
+			document.getElementById("conseillereA").classList.add("samuelA");
+		}
+		if (fields.author=="Thibaut") {
+			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/thibaut.png')";
+
+			document.getElementById("conseillereA").className = "";
+			document.getElementById("conseillereA").classList.add("thibautA");
+		}
+		if (fields.author=="Valérie") {
+			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/valerie.png')";
+
+			document.getElementById("conseillereA").className = "";
+			document.getElementById("conseillereA").classList.add("valerieA");
+		}
 
 		setTimeout(function(){
-		document.getElementById("mithildeMug").style.opacity="1"
-		document.getElementById("mithildeAnimated").style.opacity="0"
-
-	},2000)
-	}
+			document.getElementById("conseillere").style.opacity="1"
+			document.getElementById("conseillereA").style.opacity="0"
+			console.log("FU")
+		},2000)
+		}
 })
 
 var queryy = CardTime.find();
 queryy.observeChanges({
 	changed(id,fields){
-		if (Router.current().route.getName()=="show") {
+		if (Router.current().route.getName()=="admin.:_name") {
+			return
+		}else{
 			setTimeout(function(){
 			console.log("HEY ITS CARD TIME bruh!")
 			console.log(id, fields.activated)
@@ -60,8 +115,14 @@ queryy.observeChanges({
 			if(fields.activated=="tasE"){
 				//"hidE all tas"
 				document.getElementById("tas").style.display="none"
-				return
-			}else{
+				document.getElementById("tasdeTarot").style.display="none"
+			}
+
+			// attentionnnn BUG pour les tas plus grand que 9 parce qu'il y a deux 
+			// chiffres mdr
+
+			if(fields.activated=="tas1"||fields.activated=="tas2"||fields.activated=="tas3"||fields.activated=="tas4"||fields.activated=="tas5"||fields.activated=="tas6"||fields.activated=="tas7"||fields.activated=="tas8"||fields.activated=="tas9"||fields.activated=="tas10"||fields.activated=="tas11"||fields.activated=="tas12"||fields.activated=="tas13"){
+				//show tas
 				document.getElementById("tas").style.display="flex"
 			}
 
@@ -71,22 +132,28 @@ queryy.observeChanges({
 			// en train de jouer il faut remettre à zéro son compte de cards already
 			// played.
 
-			// if(fields.activated=="tarot1"){
-			// 	pointsdevie++
-			// 	document.getElementById("tas").style.display="none"
-			// 	document.getElementById("tas1PLAYD").style.display="none"
-			// 	document.getElementById("tas2PLAYD").style.display="none"
-			// 	document.getElementById("tas3PLAYD").style.display="none"
-			// 	document.getElementById("tas4PLAYD").style.display="none"
-			// 	document.getElementById("tarot").style.display="block"
+			if(fields.activated=="tarot1"){
+				pointsdevie++
+				document.getElementById("tas").style.display="none"
+				document.getElementById("cartes").style.display="none"
 
-			// }
-			// if(fields.activated=="tarot2"){
-			// 	pointsdevie++
-			// }
-			// if(fields.activated=="tarot3"){
-			// 	pointsdevie++
-			// }
+				allTarot = document.getElementsByClassName("cartedeTarot")
+
+				for (var i = allTarot.length - 1; i >= 0; i--) {
+					allTarot[i].style.display="block"
+				}
+
+				document.getElementById("tasdeTarot").style.display="block"
+
+			}
+			if(fields.activated=="tarot2"){
+				document.getElementById("tasdeTarot").style.opacity="1"
+				pointsdevie++
+			}
+			if(fields.activated=="tarot3"){
+				document.getElementById("tasdeTarot").style.opacity="1"
+				pointsdevie++
+			}
 
 		},20)
 		}
@@ -95,7 +162,7 @@ queryy.observeChanges({
 
 // lastauthor = ""
 
-allAudio = ["01", "02", "03", "04"]
+allAudio = ["01", "02"]
 
 
 Template.registerHelper('formatedDate', function(timestamp) {
@@ -106,27 +173,14 @@ Template.content.onCreated(function() {
 	moment.locale('fr')
 	// shuffle(allAudio);
 	Meteor.subscribe("TheDiscussion");	
+	Meteor.subscribe("GlobalVars");	
 	Meteor.subscribe("TheSongs");	
 	Meteor.subscribe("TheChosenBits");	
     Meteor.subscribe('allTheCards');
 	Meteor.subscribe("TheInstructions");	
 	Meteor.subscribe("CardTime", {})
 
-	Meteor.subscribe("TheIds", {
-		onReady: function () { 
-			// console.log("onReady And the Items actually Arrive", arguments); 
-			// showError("BIENVENUE : ",'ici c\'est un forum, hum bon alors c\'est peut être un peu redondant avec toutes les technologies qui existent aujourd\'hui, genre facebook 💩 et autres, m\'enfin ici ce qui est cool c\'est que si vous tapez \"play\" ben ça va jouer un son de quelqu\'un qui parle de concours d\'entrée en écoles d\'art. Quand vous en avez marre vous pouvez aussi taper \"silencio\" et le son va s\'arrêter. Voilà à plus tard! faites ce que vous voulez de cette espace, peut être avec jean-claude on s\'en servira aussi pour mettre des rappels de planning \& des comptes-rendus de ce qui va se passer ces jours.',"")
-		
-			// attribution d'un ID unique
-			// bon on part du principe que personne va trifouiller la variable de session
-
-			Session.set("localId",TheIds.findOne().theid)
-			TheIds.remove({_id:TheIds.findOne()._id})
- 
-
-	},
-		onError: function () { console.log("onError", arguments); }
-	});
+	Session.set("localId",Random.id())
 });
 
 
@@ -146,9 +200,9 @@ Template.vueParticipant.onRendered(function(){
  		document.getElementById("tas").style.display="flex"
  	}
 
-	// prend ton temps pour ranger les cartes mon frèr
+	// prend ton sweet time pour ranger les cartes mon frèr
 
- },4000)
+ },8000)
 
 });
 
@@ -175,10 +229,9 @@ Template.content.onRendered(function yo(){
 
 console.log("onrendered fired")
 
-	// aud = document.getElementById("audioFile");
-	// aud.src = allAudio[0]+"math.mp3"
-	// aud.load()
-	// allAudio.splice(0,1)
+	aud = document.getElementById("audioFile");
+	aud.src = allAudio[0]+"math.mp3"
+	aud.load()
 
 	// aud.onended = function() {
 		
@@ -216,7 +269,7 @@ Template.waiting.helpers({
 		if (GlobalVars.findOne({"name":"RDV"})===undefined || GlobalVars.findOne({"name":"RDV"}).value=="0") {
 			return
 		}else{
-			return "Rendez-vous à "+GlobalVars.findOne({"name":"RDV"}).value
+			return "La prochaine séance débutera ici le "+GlobalVars.findOne({"name":"RDV"}).value
 		}
 
 	}
@@ -227,7 +280,7 @@ Template.instructions.helpers({
 		if (TheInstructions.find({}).fetch()[0]==undefined) {
 			return ""
 		}else{
-			return "Mathilde : "+TheInstructions.find({}).fetch()[0].content	
+			return TheInstructions.find({}).fetch()[0].author+" : "+TheInstructions.find({}).fetch()[0].content	
 		}
 	}
 })
@@ -236,8 +289,14 @@ Template.content.helpers({
 	line:function(){
 		if (TheDiscussion.find({}).fetch()[0]==undefined) {
 			return ""
-		}else{		
-			return TheDiscussion.find({author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Nicole']}});
+		}else{
+			// either author: {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Nicole']}
+			// either ({})
+			if(GlobalVars.findOne({"name":"phase"}).value=="2"){ 
+				return TheDiscussion.find({});
+			}else{
+				return TheDiscussion.find({"author" : {$in:[Session.get("localId").toString() , 'Mathilde', 'Samuel', 'Nicole']}});
+			}
 		}
 	},
 
@@ -247,14 +306,11 @@ Template.content.helpers({
 		var objDiv = document.getElementById("content");
 		objDiv.scrollTop = objDiv.scrollHeight;				
 
-
-		console.log("checking")
-
-		if(this.author==="Mathilde"||this.author==="Nicole"||this.author==="Samuel"){
-			return true
+		if(this.author==Session.get("localId").toString()){
+			return "vous :"
 		}else{
-			return false
-			}
+			return "quelqu'un.e :"
+		}
 	}
 
 	// sameaslast:function(){
@@ -306,20 +362,35 @@ Template.vueParticipant.helpers({
 });
 
 Template.vueParticipant.events({
-	'click .tarotc' : function(e){
+	'click .clickable' : function(e){
+		e.currentTarget.classList.add("clicked")
+		TheChosenBits.insert({text:e.currentTarget.innerHTML})
+
+		allDivs = document.getElementsByClassName(Session.get("localId"))
+
+			for (var i = allDivs.length - 1; i >= 0; i--) {
+				allDivs[i].classList.remove("clickable")
+			}
+
+	},
+
+	'click .cartedeTarot' : function(e){
 
 		if (pointsdevie!==0) {
 		console.log("click carte de tarot", e.currentTarget.id)
 
-		whichcardtime = CardTime.findOne().activated
-		multiplier = whichcardtime.substring(5)
+		whichRound=CardTime.find({}).fetch()[0].activated.substring(5)
 
-		number = e.currentTarget.id
-		numberClean = number.substring(1)
+		shuffle(allTarotImgs)
+		randomValue = allTarotImgs.pop()
 
+
+		document.getElementById("tpc"+whichRound).style.opacity="1"
+		document.getElementById("tpc"+whichRound).style.backgroundImage = "url('/tarot/"+randomValue+".jpg')"; 
+
+
+		document.getElementById("tasdeTarot").style.opacity="0"
 		document.getElementById(e.currentTarget.id).style.display="none"
-
-		document.getElementById("x"+numberClean).style.transform="Translate("+(multiplier*300-300)+"px ,550px)"
 		
 		pointsdevie--
 		}else{
@@ -437,12 +508,13 @@ pushTxt = function(){
 			currentDurLong = aud.duration
 			currentDurShort = currentDurLong.toString()[0]+currentDurLong.toString()[1];
 			
-			showError("DIFFUSION EN COURS : ", "CET EXTRAIT DURE "+currentDurShort+" SECONDES.", "")
+			// showError("DIFFUSION EN COURS : ", "CET EXTRAIT DURE "+currentDurShort+" SECONDES.", "")
+			showError("DIFFUSION EN COURS : ","")
 			// là ça serait bien de display le time
 			document.getElementById("audioFile").play()
 			document.getElementById("mainTxtInput").focus()
 		}else{
-			showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
+			// showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
 		}
 		return
 	}	
@@ -492,23 +564,44 @@ pushTxt = function(){
 pushInstr = function(){
 	var untrimmedmsg = document.getElementById("instructionsInput").value
 
+	_author = Session.get("localId")
 	message = untrimmedmsg.trim()
 
 	console.log("MESSAGE "+ message)
 
-	if(message=="\n" || message==""){
-		document.getElementById("instructionsInput").value=""
-		return false
-		// message="..."
-		// jauge = jauge + 450
-	}
+	// if(message=="\n" || message==""){
+	// 	document.getElementById("instructionsInput").value=""
+	// 	return false
+	// 	// message="..."
+	// 	// jauge = jauge + 450
+	// }
 
 
-		Meteor.call('newInstruction',{message})
+		Meteor.call('newInstruction',{_author, message})
 	// }
 	// message = ""
 	// mmh relou cette histoire de truc que j'ai pas compris là
 	document.getElementById("instructionsInput").value=""
+}
+
+
+shuffle = function(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 

@@ -10,26 +10,26 @@ Meteor.startup(function(){
     ViewSwitcher.insert({"name":"aftershow", "activated":false})
   }
 
-  if(TheIds.findOne()===undefined){
-    console.log("TheIds IS EMPTY, INSERTING NOW")
-    for (var i = 999 - 1; i >= 0; i--) {
-        TheIds.insert({"theid":i})
-      }
-  }
-
   if(TheInstructions.findOne()===undefined){
     console.log("TheInstructions is empty")
     TheInstructions.insert({"author":"Test", "content":"Test", "timestamp":new Date()})
   }
 
-  if(GlobalVars.findOne()===undefined){
-    console.log("GlobalVars is empty")
-    GlobalVars.insert({"name":"RDV", "value":"15",})
-  }
+  // just reboot everything when you deploy
+  GlobalVars.remove({})
+  console.log("reloading GlobalVars")
+  GlobalVars.insert({"name":"RDV", "value":"samedi 21/11/20 à 10H.",})
+  // heure de rdv
+  GlobalVars.insert({"name":"phase", "value":1,})
+  // affichage des commentaires de tous (2) ou de personne (1)
+  GlobalVars.insert({"name":"clickable", "value":1,})
+  // déclenche le cliquage-sur-les-phrases
+  GlobalVars.insert({"name":"end", "value":1,})
+  // déclenche le scroll final
 
   if(CardTime.findOne()===undefined){
     console.log("CardTime is empty")
-    TheInstructions.insert({"activated":"Test"})
+    CardTime.insert({"activated":"none"})
   }
 
 
@@ -39,6 +39,10 @@ if (Meteor.isServer) {
 
   Meteor.publish("TheChosenBits", function(){
     return TheChosenBits.find();
+  });
+  
+  Meteor.publish("TheArchive", function(){
+    return TheArchive.find();
   });
   
   Meteor.publish("TheSongs", function(){
@@ -57,10 +61,6 @@ if (Meteor.isServer) {
     return ViewSwitcher.find();
   });
 
-  Meteor.publish('TheIds', function() {
-   return TheIds.find();
-  });
-
   Meteor.publish('GlobalVars', function() {
    return GlobalVars.find();
   });
@@ -76,10 +76,6 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    scrollDivServer : function(){
-      Meteor.call('scrollDiv')
-    },
-
     removeAll : function(){
       TheDiscussion.remove({})
     },
@@ -92,8 +88,6 @@ Meteor.methods({
       console.log("args.obj ", args.obj)
       TheCards.update(args._id, { $set: args.obj });
     },
-
-
 })
 
 TheDiscussion.allow({
@@ -122,15 +116,6 @@ CardTime.allow({
     return true
   },
   update:function(){
-    return true
-  }
-})
-
-TheIds.allow({
-  insert:function(){
-    return true
-  },
-  remove:function(){
     return true
   }
 })

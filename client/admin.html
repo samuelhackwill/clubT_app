@@ -4,11 +4,11 @@
 			<div id="content">
 				{{#each lineADMIN}}
 				<div id="contentblock">
-					<div id="left">
+					<div id="l">
 					<span id="author" class="lowKey">{{author}} :</span> <!-- <span id="timestamp" class="lowKey">{{formatedDate timestamp}}</span> -->
 					</div>
 					
-					<div id="right"><span id="actualContent" class={{author}}> {{content}}</span>
+					<div id="r"><span id="actualContent" class={{author}}> {{content}}</span>
 					</div>
 				</div>
 				{{/each}}
@@ -16,7 +16,7 @@
 			<div id="form">
 
 				<div id="contentblock">	
-					<div id="right">
+					<div id="r">
 						<textarea id="mainTxtInput" type="text" wrap="soft" placeholder="..." onfocus="this.placeholder=''" onblur="this.placeholder='...'"></textarea>
 					</div>
 				</div>
@@ -40,12 +40,20 @@
 		{{/each}}
 
 		<br/>
-		<!-- 
+		
 		<button class="tas">TAROT1</button>
 		<button class="tas">TAROT2</button>
 		<button class="tas">TAROT3</button>
-		 -->
-		<button class="tas" id="DESACTIVAY">HIDE ALL TAS</button>
+		
+		<button class="tas" id="DESACTIVAY">HIDE ALL TAS!</button>
+		<br/>
+
+		<button id="ToggleClickable">EVERYBODY CHOOSE THEIR FAVOURITE SENTENCE!</button>
+		<br/>
+		<button id="ToggleEveryone">SHOW ALL MESSAGES TO EVERYBODY!</button>
+		<br/>
+		<button id="ToggleSolo">EVERYBODY ALONE NOW!</button>
+		<br/>
 
 		 {{#each ViewSwitchers}}
 		<label class="container"> {{name}}
@@ -53,6 +61,9 @@
 		<span class="checkmark"></span>
 		</label>
 		{{/each}}
+
+		<button id="End" style="background-color: black; color:white">ENVOYEZ LA FIN!</button>
+
 
 		<div>
 			heure de rendez-vous? (entrez zéro "0" pour effacer)
