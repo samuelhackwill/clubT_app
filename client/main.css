@@ -64,6 +64,7 @@ svg{
 
 .clicked{
 	color:green;
+	pointer-events: none!important;
 }
 
 .overflowing{
@@ -271,6 +272,8 @@ svg{
 .tasDeCartes{
 	position: absolute;
 
+	display: none;
+
 	right:20px;
 	bottom:0px;
 	transform: translateY(-50%);
@@ -366,7 +369,6 @@ svg{
 
 .container{
 	background-color:yellow;
-	grid-row-start:4;
 	border-style: solid;
 	border-color:black;
 }
@@ -676,6 +678,23 @@ grid-column-end: span 5;
 	width:100px;
 
 	margin-left:100px;
+}
+
+.admin #container{
+	width:98vw;
+	height:98vh;
+
+	display: grid;
+	grid-template-columns: 20%10%10%10%10%10%10%10%10%;
+	grid-template-rows: 10%16.66%16.66%16.66%16.66%16.66%;
+}
+
+.admin #leftColumn{
+	display: inherit;
+	grid-row-start: 1;
+	grid-row-end: span 6;
+	grid-column-start: 1;
+	grid-column-end: span 2;
 }
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */

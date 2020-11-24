@@ -58,15 +58,6 @@ Schemas.TheChosenBits = new SimpleSchema({
 	}
 })
 
-Schemas.GlobalVars = new SimpleSchema({
-	"name":{
-		type:String
-	},
-	"value":{
-		type:String
-	}
-})
-
 Schemas.ViewSwitcher = new SimpleSchema({
 	"name": {
 		type : String
@@ -129,8 +120,6 @@ TheChosenBits.attachSchema(Schemas.TheChosenBits);
 TheDiscussion.attachSchema(Schemas.TheDiscussion);
 TheInstructions.attachSchema(Schemas.TheInstructions);
 ViewSwitcher.attachSchema(Schemas.ViewSwitcher);
-GlobalVars.attachSchema(Schemas.GlobalVars);
-
 
 
 TheCards.allow({

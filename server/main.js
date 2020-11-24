@@ -22,7 +22,7 @@ Meteor.startup(function(){
   // heure de rdv
   GlobalVars.insert({"name":"phase", "value":1,})
   // affichage des commentaires de tous (2) ou de personne (1)
-  GlobalVars.insert({"name":"clickable", "value":1,})
+  GlobalVars.insert({"name":"clickable", "value":false,})
   // déclenche le cliquage-sur-les-phrases
   GlobalVars.insert({"name":"end", "value":1,})
   // déclenche le scroll final

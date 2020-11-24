@@ -22,6 +22,8 @@ Template.vueAdmin.onCreated(function() {
 	Meteor.subscribe("GlobalVars");
 	Meteor.subscribe("allTheCards")
 
+	$(document.body).addClass('admin');
+
 });
 
 
@@ -113,7 +115,8 @@ Template.vueAdmin.events({
 	},
 
 	'click #ToggleClickable' : function(){
-    	GlobalVars.update(GlobalVars.find({"name":"clickable"}).fetch()[0]._id, {$set:{"value":"2"}})
+		_not =! GlobalVars.find({"name":"clickable"}).fetch()[0].value
+    	GlobalVars.update(GlobalVars.find({"name":"clickable"}).fetch()[0]._id, {$set:{"value":_not}})
 	},
 
 	'click #End' : function(){
@@ -123,15 +126,24 @@ Template.vueAdmin.events({
 	'click .tas' : function(e){
 		console.log(e.target.innerHTML)
 
-		if (e.target.innerHTML[2]=="R") {
-			// lol
-			// c'est le "r" de "tarot"
-			CardTime.update(CardTime.findOne()._id, {$set:{activated:"tarot"+e.target.innerHTML[5]}})
+		_typeOfCard = e.target.innerHTML.substring(0,3)
+
+		if (_typeOfCard=="TAR") {
+			// tarot is 5 letters, so get number at the end of "tarot", position 5 of substring
+			CardTime.update(CardTime.findOne()._id, {$set:{activated:"tarot"+e.target.innerHTML.substring(5)}})
 			return
-		}else{
-		// 0T 1A 2S 3_ tu vois le délire? faites moi un procès
-		CardTime.update(CardTime.findOne()._id, {$set:{activated:"tas"+e.target.innerHTML[3]}})
 		}
+		if (_typeOfCard=="TAS"){
+			// tas is 3 letters, so get number at the end of "tas", position 3 of substring
+			CardTime.update(CardTime.findOne()._id, {$set:{activated:"tas"+e.target.innerHTML.substring(3)}})
+			return
+		}
+		if (_typeOfCard=="HID"){
+			//"hide all tas"
+			CardTime.update(CardTime.findOne()._id, {$set:{activated:false}})
+			return
+		}
+		
 	},
 
 	'click #envoyerINSTRUCTIONS' : function(){

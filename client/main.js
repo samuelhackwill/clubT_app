@@ -13,6 +13,7 @@ allTarotImgs = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 cardsAlreadyPlayed = 0
 cardIndex = 1
 deckcount = 1
+infiniteCardZIndex = 1
 
 currentDurLong = 0
 currentDurShort = ''
@@ -42,7 +43,7 @@ gVQuery.observe({
 	changed:function(newDocument){
 		console.log("observe change", newDocument.name)
 
-		if(newDocument.name=="clickable"&&newDocument.value=="2"){
+		if(newDocument.name=="clickable"){
 			console.log("add class to everybody là")
 			allDivs = document.getElementsByClassName(Session.get("localId"))
 
@@ -59,35 +60,35 @@ gVQuery.observe({
 })
 
 var qqquery = TheInstructions.find();
-qqquery.observeChanges({
-	changed:function(id, fields){
+qqquery.observe({
+	changed:function(newDocument){
 
-		console.log(id, fields.author)
+		console.log(newDocument)
 
 		document.getElementById("conseillere").style.opacity="0"
 		document.getElementById("conseillereA").style.opacity="1"
 
 
-		if (fields.author=="Mathilde") {
+		if (newDocument.author=="Mathilde") {
 			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/mathilde.png')";
 			// la tête qui demeure.
 			document.getElementById("conseillereA").className = "";
 			document.getElementById("conseillereA").classList.add("mathildeA");
 			// pour l'animation.
 		}
-		if (fields.author=="Samuel") {
+		if (newDocument.author=="Samuel") {
 			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/samuel.png')";
 
 			document.getElementById("conseillereA").className = "";
 			document.getElementById("conseillereA").classList.add("samuelA");
 		}
-		if (fields.author=="Thibaut") {
+		if (newDocument.author=="Thibaut") {
 			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/thibaut.png')";
 
 			document.getElementById("conseillereA").className = "";
 			document.getElementById("conseillereA").classList.add("thibautA");
 		}
-		if (fields.author=="Valérie") {
+		if (newDocument.author=="Valérie") {
 			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/valerie.png')";
 
 			document.getElementById("conseillereA").className = "";
@@ -112,7 +113,7 @@ queryy.observeChanges({
 			console.log("HEY ITS CARD TIME bruh!")
 			console.log(id, fields.activated)
 
-			if(fields.activated=="tasE"){
+			if(fields.activated==false){
 				//"hidE all tas"
 				document.getElementById("tas").style.display="none"
 				document.getElementById("tasdeTarot").style.display="none"
@@ -194,7 +195,7 @@ Template.vueParticipant.onRendered(function(){
  		allthecards[i].style="transform:translate("+(Math.floor(Math.random() * 400) + 100)+"px, "+(Math.floor(Math.random() * 200) + 1)+"px) rotate("+Math.ceil(Math.random() * 7) * (Math.round(Math.random()) ? 1 : -1)+"deg);"
  	}
  	
- 	if (CardTime.findOne().activated.substring(3)=="E") {
+ 	if (CardTime.findOne().activated==false) {
  		return
  	}else{
  		document.getElementById("tas").style.display="flex"
@@ -233,18 +234,18 @@ console.log("onrendered fired")
 	aud.src = allAudio[0]+"math.mp3"
 	aud.load()
 
-	// aud.onended = function() {
+	aud.onended = function() {
+		allAudio.splice(0,1)
 		
-	// 	if(allAudio[0]){
-	// 		aud.src = allAudio[0]+"math.mp3"
-	// 		aud.load()
-	// 		allAudio.splice(0,1)
-	// 	}else{
-	// 		showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
-	// 		aud.src = ""
-	// 		aud.load()
-	// 	}
-	// }; 
+		if(allAudio[0]){
+			aud.src = allAudio[0]+"math.mp3"
+			aud.load()
+		}else{
+			// showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
+			aud.src = ""
+			aud.load()
+		}
+	}; 
 
 	// aud.onpause = function() {
 
@@ -253,7 +254,7 @@ console.log("onrendered fired")
 	// 		aud.load()
 	// 		allAudio.splice(0,1)
 	// 	}else{
-	// 		showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
+	// 		// showError("HÉ BEN BRAVO : ", "VOUS AVEZ ÉCOUTÉ TOUS LES EXTRAITS AUDIO, BELLE PATIENCE.", "")
 	// 		aud.src = ""
 	// 		aud.load()
 	// 	}
@@ -351,8 +352,13 @@ Template.vueParticipant.helpers({
 	},
 
 	currentDeckLogo : function(){
-		deckcount = parseInt(CardTime.findOne().activated.substring(3))
-		return TheCards.findOne({deck:deckcount}).logo
+
+		if(CardTime.findOne().activated){
+			deckcount = parseInt(CardTime.findOne().activated.substring(3))
+			return TheCards.findOne({deck:deckcount}).logo
+		}else{
+			return
+		}
 	},
 
 	listCards : function(){
@@ -408,13 +414,15 @@ Template.vueParticipant.events({
 		console.log("click on tas de cartes, fetching deck ", deckcount, ", card ", cardIndex, " and ", cardsAlreadyPlayed, " already played.")
 			
 			if(cardsAlreadyPlayed < TheCards.find({"deck":deckcount}).fetch().length-1){
-				document.getElementById("card"+deckcount+"."+cardIndex).style.display="flex"
 				cardsAlreadyPlayed ++
 			}else{
-				document.getElementById("card"+deckcount+"."+cardIndex).style.display="flex"
 				document.getElementById("tas").style.display="none"
 			}
+
+			document.getElementById("card"+deckcount+"."+cardIndex).style.display="flex"
+			document.getElementById("card"+deckcount+"."+cardIndex).style.zIndex=infiniteCardZIndex
 			cardIndex ++
+			infiniteCardZIndex ++
 	}
 })
 
@@ -505,12 +513,10 @@ pushTxt = function(){
 	if(message=="play" || message=="PLAY" || message=="Play" || message=="play\n" || message=="play\s"){
 		if(allAudio[0]){
 			// get duration
-			currentDurLong = aud.duration
-			currentDurShort = currentDurLong.toString()[0]+currentDurLong.toString()[1];
+			currentDurSec = aud.duration.toFixed(0)
 			
-			// showError("DIFFUSION EN COURS : ", "CET EXTRAIT DURE "+currentDurShort+" SECONDES.", "")
-			showError("DIFFUSION EN COURS : ","")
-			// là ça serait bien de display le time
+			showError("DIFFUSION EN COURS : ", "CET EXTRAIT DURE "+currentDurSec+" SECONDES.", "")
+			// showError("DIFFUSION EN COURS : ","")
 			document.getElementById("audioFile").play()
 			document.getElementById("mainTxtInput").focus()
 		}else{
@@ -543,7 +549,7 @@ pushTxt = function(){
 				showError("ERREUR : ",error.reason, message)
 			}else{
 				console.log("message bien inséré dans la db, ", result)
-				if(localId!="Mathilde"||"Nicole"||"Samuel"){
+				if(who!="Mathilde"||"Nicole"||"Samuel"){
 				jauge = jauge + message.length
 				}	
 				clearTimeout(clearJauge)
