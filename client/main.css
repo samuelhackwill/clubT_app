@@ -347,7 +347,7 @@ svg{
 
 #waitingScreen{
 	font-family:Avara_Black !important;
-	font-size:1.7vw;
+	font-size:1.4vw;
 	width:66vw;
 	margin-top:2vw;
 	margin-left:2vw;
@@ -501,7 +501,7 @@ transform: translate(0%,-50%);
 #starWars{
 	top: 100vh;
 	color:white;
-	transition:transform 120s linear;
+	transition:transform 120s linear, opacity 2s;
 	transform: translateY(0px);
 	width: 100%;
 	position: absolute;
@@ -542,7 +542,7 @@ transform: translate(0%,-50%);
 }
 
 #conseillere{
-	background-image: url("/mugshots/mathilde.png");
+	background-image: url("/mugshots/Mathilde.png");
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -564,8 +564,8 @@ transform: translate(0%,-50%);
 }
 
 
-.mathildeA{
-	background-image: url("mugshots/mathildeA.png");
+.MathildeA{
+	background-image: url("mugshots/MathildeA.png");
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -573,12 +573,12 @@ transform: translate(0%,-50%);
 }
 
 @keyframes blablaM {
- 0%, 100%{background-image: url("mugshots/mathilde.png");}
- 50%{background-image: url("mugshots/mathildeA.png");}
+ 0%, 100%{background-image: url("mugshots/Mathilde.png");}
+ 50%{background-image: url("mugshots/MathildeA.png");}
 }
 
-.samuelA{
-	background-image: url("mugshots/samuelA.png");
+.SamuelA{
+	background-image: url("mugshots/SamuelA.png");
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -586,12 +586,12 @@ transform: translate(0%,-50%);
 }
 
 @keyframes blablaS {
- 0%, 100%{background-image: url("mugshots/samuel.png");}
- 50%{background-image: url("mugshots/samuelA.png");}
+ 0%, 100%{background-image: url("mugshots/Samuel.png");}
+ 50%{background-image: url("mugshots/SamuelA.png");}
 }
 
-.thibautA{
-	background-image: url("mugshots/thibautA.png");
+.ThibautA{
+	background-image: url("mugshots/ThibautA.png");
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -599,13 +599,13 @@ transform: translate(0%,-50%);
 }
 
 @keyframes blablaT {
- 0%, 100%{background-image: url("mugshots/thibaut.png");}
- 50%{background-image: url("mugshots/thibautA.png");}
+ 0%, 100%{background-image: url("mugshots/Thibaut.png");}
+ 50%{background-image: url("mugshots/ThibautA.png");}
 }
 
 
-.valerieA{
-	background-image: url("mugshots/valerieA.png");
+.ValerieA{
+	background-image: url("mugshots/ValerieA.png");
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -613,10 +613,35 @@ transform: translate(0%,-50%);
 }
 
 @keyframes blablaV {
- 0%, 100%{background-image: url("mugshots/valerie.png");}
- 50%{background-image: url("mugshots/valerieA.png");}
+ 0%, 100%{background-image: url("mugshots/Valerie.png");}
+ 50%{background-image: url("mugshots/ValerieA.png");}
 }
 
+.CamilleA{
+	background-image: url("mugshots/CamilleA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaC .3s infinite linear;
+}
+
+@keyframes blablaC {
+ 0%, 100%{background-image: url("mugshots/Camille.png");}
+ 50%{background-image: url("mugshots/CamilleA.png");}
+}
+
+.MaximeA{
+	background-image: url("mugshots/MaximeA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaMax .3s infinite linear;
+}
+
+@keyframes blablaMax {
+ 0%, 100%{background-image: url("mugshots/Maxime.png");}
+ 50%{background-image: url("mugshots/MaximeA.png");}
+}
 
 #cartes{
 

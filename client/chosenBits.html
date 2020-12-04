@@ -28,7 +28,15 @@
 			<input class="composeLine" type="text" name="">
 			<input class="composeLine" type="text" name="">
 			<button id="sendPoesie">SEND DA POËSIS! (7 FULL LENGTH POESIES MAX POUR LE MOMENT!)</button>
+		
+			<div id="composeSongs" style="overflow: scroll; height: 300px">
+				{{#each TheSongs}}
+					<h2>{{title}}</h2>
+					{{#each text}}
+						<div>{{this}}</div>
+					{{/each}}
+				{{/each}}
+			</div>
 		</div>
-
 	</div>
 </template>

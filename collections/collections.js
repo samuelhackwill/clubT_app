@@ -37,6 +37,10 @@ Schemas.TheCards = new SimpleSchema({
 })
 
 Schemas.TheSongs = new SimpleSchema({
+	"timestamp":{
+		type:Date
+	},
+	
 	"title":{
 		type:String
 	},

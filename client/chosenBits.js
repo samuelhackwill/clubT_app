@@ -19,6 +19,10 @@ Template.chosenBits.onRendered(function(){
 Template.chosenBits.helpers({
 	chosenBits:function(){
 		return TheChosenBits.find({})
+	},
+
+	TheSongs:function(){
+		return TheSongs.find({}, {sort:{timestamp:-1}})
 	}
 })
 
@@ -52,11 +56,11 @@ Template.chosenBits.events({
 		_date = nowD+"/"+nowM+"/"+nowY
 
 		_title = document.getElementById("composeTitle").value
+		document.getElementById("composeTitle").value = ""
 		linesArray = []
 		for (var i = 0; i < document.getElementsByClassName("composeLine").length-1; i++) {
-			console.log("looks like this before push ", document.getElementsByClassName("composeLine")[i].value)
 			linesArray.push(document.getElementsByClassName("composeLine")[i].value)
-			console.log("looks like this after push ", linesArray[linesArray.length-1])
+			document.getElementsByClassName("composeLine")[i].value=""
 		}
 
 		// sanitize unwanted empty lines at the end
@@ -66,7 +70,8 @@ Template.chosenBits.events({
 			}else{
 		//push to DB
 				console.log(" here is what i'm going to push ", linesArray)
-				TheSongs.insert({title:_title, text:linesArray, date:_date})
+				TheSongs.insert({title:_title, text:linesArray, date:_date, timestamp:now})
+
 				return
 			}
 

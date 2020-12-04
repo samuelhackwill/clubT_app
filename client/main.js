@@ -20,7 +20,6 @@ currentDurShort = ''
 
 pointsdevie = 0
 
-
 var jauge = 0
 var maxjauge = 1200
 var temps = 1500
@@ -53,7 +52,28 @@ gVQuery.observe({
 		}
 
 		if(newDocument.name=="end"&&newDocument.value=="2"){
+			// 1 s pour 100 pixels
+			pixels = document.getElementById("starWars").clientHeight
+			animationSeconds = pixels/100
+
+			document.getElementById("starWars").style.transition = "transform "+ animationSeconds.toFixed() +"s linear, opacity 2s"
 			document.getElementById("starWars").style.transform = "translateY(-100%)"
+		}
+
+		if(newDocument.name=="end"&&newDocument.value=="1"){
+			pixels = document.getElementById("starWars").clientHeight
+			animationSeconds = pixels*10
+
+			document.getElementById("starWars").style.opacity = "0"
+
+			setTimeout(function(){
+				console.log("starWars ready for next animation")
+				document.getElementById("starWars").style.transform = "translateY(0px)"
+			},2000)
+
+			setTimeout(function(){
+				document.getElementById("starWars").style.opacity = "1"
+			},animationSeconds.toFixed())
 		}
 
 	}
@@ -63,37 +83,15 @@ var qqquery = TheInstructions.find();
 qqquery.observe({
 	changed:function(newDocument){
 
-		console.log(newDocument)
+		document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/"+newDocument.author+".png')";
+		// la tête qui demeure.
+		document.getElementById("conseillereA").className = "";
+		document.getElementById("conseillereA").classList.add(newDocument.author+"A");
+		// pour l'animation.
 
 		document.getElementById("conseillere").style.opacity="0"
 		document.getElementById("conseillereA").style.opacity="1"
 
-
-		if (newDocument.author=="Mathilde") {
-			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/mathilde.png')";
-			// la tête qui demeure.
-			document.getElementById("conseillereA").className = "";
-			document.getElementById("conseillereA").classList.add("mathildeA");
-			// pour l'animation.
-		}
-		if (newDocument.author=="Samuel") {
-			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/samuel.png')";
-
-			document.getElementById("conseillereA").className = "";
-			document.getElementById("conseillereA").classList.add("samuelA");
-		}
-		if (newDocument.author=="Thibaut") {
-			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/thibaut.png')";
-
-			document.getElementById("conseillereA").className = "";
-			document.getElementById("conseillereA").classList.add("thibautA");
-		}
-		if (newDocument.author=="Valérie") {
-			document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/valerie.png')";
-
-			document.getElementById("conseillereA").className = "";
-			document.getElementById("conseillereA").classList.add("valerieA");
-		}
 
 		setTimeout(function(){
 			document.getElementById("conseillere").style.opacity="1"
@@ -163,7 +161,7 @@ queryy.observeChanges({
 
 // lastauthor = ""
 
-allAudio = ["01", "02"]
+allAudio = ["01"]
 
 
 Template.registerHelper('formatedDate', function(timestamp) {
@@ -390,6 +388,7 @@ Template.vueParticipant.events({
 		shuffle(allTarotImgs)
 		randomValue = allTarotImgs.pop()
 
+		console.log(whichRound)
 
 		document.getElementById("tpc"+whichRound).style.opacity="1"
 		document.getElementById("tpc"+whichRound).style.backgroundImage = "url('/tarot/"+randomValue+".jpg')"; 

@@ -39,7 +39,7 @@ Template.vueAdmin.onRendered(function yo(){
 
 Template.vueAdmin.helpers({
 	getDecks:function(){
-		return TheCards.find({index:1})
+		return TheCards.find({index:1}, {sort: {deck:1}})
 	},
 
 	currentRDV:function(){
@@ -121,6 +121,10 @@ Template.vueAdmin.events({
 
 	'click #End' : function(){
     	GlobalVars.update(GlobalVars.find({"name":"end"}).fetch()[0]._id, {$set:{"value":"2"}})
+	},
+
+	'click #UnEnd' : function(){
+    	GlobalVars.update(GlobalVars.find({"name":"end"}).fetch()[0]._id, {$set:{"value":"1"}})
 	},
 
 	'click .tas' : function(e){
