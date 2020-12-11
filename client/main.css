@@ -643,6 +643,45 @@ transform: translate(0%,-50%);
  50%{background-image: url("mugshots/MaximeA.png");}
 }
 
+.AgatheA{
+	background-image: url("mugshots/AgatheA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaAgathe .3s infinite linear;
+}
+
+@keyframes blablaAgathe {
+ 0%, 100%{background-image: url("mugshots/Agathe.png");}
+ 50%{background-image: url("mugshots/AgatheA.png");}
+}
+
+.VincentA{
+	background-image: url("mugshots/VincentA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaVincent .3s infinite linear;
+}
+
+@keyframes blablaVincent {
+ 0%, 100%{background-image: url("mugshots/Vincent.png");}
+ 50%{background-image: url("mugshots/VincentA.png");}
+}
+
+.EmmaA{
+	background-image: url("mugshots/EmmaA.png");
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	animation: blablaEmma .3s infinite linear;
+}
+
+@keyframes blablaEmma {
+ 0%, 100%{background-image: url("mugshots/Emma.png");}
+ 50%{background-image: url("mugshots/EmmaA.png");}
+}
+
 #cartes{
 
 	grid-row-start: 2;

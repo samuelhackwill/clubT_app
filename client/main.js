@@ -161,7 +161,7 @@ queryy.observeChanges({
 
 // lastauthor = ""
 
-allAudio = ["01"]
+allAudio = ["01", "02"]
 
 
 Template.registerHelper('formatedDate', function(timestamp) {
