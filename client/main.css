@@ -542,6 +542,13 @@ transform: translate(0%,-50%);
 }
 
 #conseillere{
+/*	background-position: left top;
+	background-repeat: no-repeat;
+	width: 140px;
+	height: 140px;
+	background-size: contain;
+	border-radius: 20px;
+*/
 	background-image: url("/mugshots/Mathilde.png");
 	background-size: contain;
 	background-position: center;

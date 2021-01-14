@@ -52,9 +52,9 @@ gVQuery.observe({
 		}
 
 		if(newDocument.name=="end"&&newDocument.value=="2"){
-			// 1 s pour 100 pixels
+			// 1 s pour 80 pixels
 			pixels = document.getElementById("starWars").clientHeight
-			animationSeconds = pixels/100
+			animationSeconds = pixels/80
 
 			document.getElementById("starWars").style.transition = "transform "+ animationSeconds.toFixed() +"s linear, opacity 2s"
 			document.getElementById("starWars").style.transform = "translateY(-100%)"
@@ -62,7 +62,7 @@ gVQuery.observe({
 
 		if(newDocument.name=="end"&&newDocument.value=="1"){
 			pixels = document.getElementById("starWars").clientHeight
-			animationSeconds = pixels*10
+			animationSeconds = pixels*8
 
 			document.getElementById("starWars").style.opacity = "0"
 
@@ -200,7 +200,7 @@ Template.vueParticipant.onRendered(function(){
  	}
 
 	// prend ton sweet time pour ranger les cartes mon frèr
-
+	// ça serait quand même mieux d'utiliser une promesse lol
  },8000)
 
 });
@@ -217,6 +217,11 @@ Template.waiting.onCreated(function(){
 Template.waiting.onRendered(function(){
  document.body.style.opacity=1
 });
+
+Template.aftershow.onCreated(function(){
+	Meteor.subscribe("ViewSwitcher", {})
+	Meteor.subscribe("GlobalVars", {})
+})
 
 Template.aftershow.onRendered(function(){
  document.body.style.opacity=1
@@ -259,18 +264,17 @@ console.log("onrendered fired")
 	// }; 
 })
 
+Template.registerHelper('RDV', function(){
+	if (GlobalVars.findOne({"name":"RDV"})===undefined || GlobalVars.findOne({"name":"RDV"}).value=="0") {
+		return
+	}else{
+		return "La prochaine séance débutera ici le "+GlobalVars.findOne({"name":"RDV"}).value
+	}
+})
+
 Template.waiting.helpers({
 	listCards : function(){
 		return TheCards.find({});
-	},
-
-	RDV:function(){
-		if (GlobalVars.findOne({"name":"RDV"})===undefined || GlobalVars.findOne({"name":"RDV"}).value=="0") {
-			return
-		}else{
-			return "La prochaine séance débutera ici le "+GlobalVars.findOne({"name":"RDV"}).value
-		}
-
 	}
 });
 
