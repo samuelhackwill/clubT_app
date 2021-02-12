@@ -16,9 +16,10 @@ Meteor.startup(function(){
   }
 
   // just reboot everything when you deploy
-  GlobalVars.remove({})
-  console.log("reloading GlobalVars")
-  GlobalVars.insert({"name":"RDV", "value":"samedi 21/11/20 à 10H.",})
+  // GlobalVars.remove({})
+  // console.log("reloading GlobalVars")
+  // GlobalVars.insert({"name":"RDV", "value":"Vendredi 15/01/21 à 12H30.",})
+  
   // heure de rdv
   GlobalVars.insert({"name":"phase", "value":1,})
   // affichage des commentaires de tous (2) ou de personne (1)

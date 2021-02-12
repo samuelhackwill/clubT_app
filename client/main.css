@@ -499,6 +499,7 @@ transform: translate(0%,-50%);
 }
 
 #starWars{
+	z-index: 9999;
 	top: 100vh;
 	color:white;
 	transition:transform 120s linear, opacity 2s;
@@ -542,18 +543,22 @@ transform: translate(0%,-50%);
 }
 
 #conseillere{
-/*	background-position: left top;
-	background-repeat: no-repeat;
 	width: 140px;
 	height: 140px;
-	background-size: contain;
 	border-radius: 20px;
-*/
+
+	background:url("/mugshots/Mathilde.png");
+	background-position: left top!important;
+	background-repeat: no-repeat!important;
+	background-size: cover!important;
+
+	margin-left:50px;
+/*
 	background-image: url("/mugshots/Mathilde.png");
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
-
+*/
 	grid-row-start: 1;
 	grid-row-end: span 1;
 

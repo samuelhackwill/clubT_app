@@ -8,7 +8,10 @@ import './main.html';
 import moment from 'moment/min/moment-with-locales.min.js';
 import { Random } from 'meteor/random'
 
-allTarotImgs = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+// this is called a spread operator
+allTarotImgs = [...Array(33).keys()]
+// change in case of change of number of cards
+horizontalOrVertical = ["horizontales(33)", "verticales(33)"]
 
 cardsAlreadyPlayed = 0
 cardIndex = 1
@@ -62,18 +65,23 @@ gVQuery.observe({
 
 		if(newDocument.name=="end"&&newDocument.value=="1"){
 			pixels = document.getElementById("starWars").clientHeight
-			animationSeconds = pixels*8
+			animationSeconds = 1
 
+			// hide starwars
 			document.getElementById("starWars").style.opacity = "0"
 
+			// go fast to the top after the fade out
 			setTimeout(function(){
 				console.log("starWars ready for next animation")
+				document.getElementById("starWars").style.transition = "transform 1s linear, opacity 2s"
 				document.getElementById("starWars").style.transform = "translateY(0px)"
 			},2000)
 
+			// five seconds later, show div again so it's ready to fire again if needed
+			// the div is at the bottom of the screen
 			setTimeout(function(){
 				document.getElementById("starWars").style.opacity = "1"
-			},animationSeconds.toFixed())
+			},(5000).toFixed())
 		}
 
 	}
@@ -83,21 +91,21 @@ var qqquery = TheInstructions.find();
 qqquery.observe({
 	changed:function(newDocument){
 
-		document.getElementById("conseillere").style.backgroundImage = "url('/mugshots/"+newDocument.author+".png')";
+		document.getElementById("conseillere").style.background = "url('/mugshots/"+newDocument.author+".png')";
 		// la tête qui demeure.
-		document.getElementById("conseillereA").className = "";
-		document.getElementById("conseillereA").classList.add(newDocument.author+"A");
+		// document.getElementById("conseillereA").className = "";
+		// document.getElementById("conseillereA").classList.add(newDocument.author+"A");
 		// pour l'animation.
 
-		document.getElementById("conseillere").style.opacity="0"
-		document.getElementById("conseillereA").style.opacity="1"
+		// document.getElementById("conseillere").style.opacity="0"
+		// document.getElementById("conseillereA").style.opacity="1"
 
 
-		setTimeout(function(){
-			document.getElementById("conseillere").style.opacity="1"
-			document.getElementById("conseillereA").style.opacity="0"
-			console.log("FU")
-		},2000)
+		// setTimeout(function(){
+		// 	document.getElementById("conseillere").style.opacity="1"
+		// 	document.getElementById("conseillereA").style.opacity="0"
+		// 	console.log("FU")
+		// },2000)
 		}
 })
 
@@ -161,7 +169,7 @@ queryy.observeChanges({
 
 // lastauthor = ""
 
-allAudio = ["01", "02"]
+allAudio = ["01"]
 
 
 Template.registerHelper('formatedDate', function(timestamp) {
@@ -389,13 +397,15 @@ Template.vueParticipant.events({
 
 		whichRound=CardTime.find({}).fetch()[0].activated.substring(5)
 
+
 		shuffle(allTarotImgs)
 		randomValue = allTarotImgs.pop()
 
-		console.log(whichRound)
+
+		whichFolder = horizontalOrVertical[Math.round(Math.random())?1:0]
 
 		document.getElementById("tpc"+whichRound).style.opacity="1"
-		document.getElementById("tpc"+whichRound).style.backgroundImage = "url('/tarot/"+randomValue+".jpg')"; 
+		document.getElementById("tpc"+whichRound).style.backgroundImage = "url('/tarot/"+whichFolder+"/"+randomValue+".jpg')"; 
 
 
 		document.getElementById("tasdeTarot").style.opacity="0"
