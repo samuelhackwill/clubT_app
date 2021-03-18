@@ -97,6 +97,9 @@ Template.vueAdmin.events({
 
     // change the db for the checked checkbox
 	    ViewSwitcher.update(ViewSwitcher.find({"name":e.target.id}).fetch()[0]._id, {$set:{"activated":!ViewSwitcher.find({"name":e.target.id}).fetch()[0].activated},})
+			
+	// hide all tas.
+		CardTime.update(CardTime.findOne()._id, {$set:{activated:false}})
 
   },
 
