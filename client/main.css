@@ -347,7 +347,7 @@ svg{
 
 #waitingScreen{
 	font-family:Avara_Black !important;
-	font-size:1.4vw;
+	font-size:1vw;
 	width:66vw;
 	margin-top:2vw;
 	margin-left:2vw;
@@ -547,7 +547,7 @@ transform: translate(0%,-50%);
 	height: 140px;
 	border-radius: 20px;
 
-	background:url("/mugshots/Mathilde.png");
+	background:url("/mugshots/The Quick Brown Fox.png");
 	background-position: left top!important;
 	background-repeat: no-repeat!important;
 	background-size: cover!important;

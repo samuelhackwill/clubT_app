@@ -9,9 +9,10 @@ import moment from 'moment/min/moment-with-locales.min.js';
 import { Random } from 'meteor/random'
 
 // this is called a spread operator
-allTarotImgs = [...Array(33).keys()]
+//allTarotImgs = [...Array(33).keys()]
+allTarotImgs = [...Array(10).keys()]
 // change in case of change of number of cards
-horizontalOrVertical = ["horizontales(33)", "verticales(33)"]
+horizontalOrVertical = ["horizontales(10)", "verticales(10)"]
 
 cardsAlreadyPlayed = 0
 cardIndex = 1
@@ -276,7 +277,7 @@ Template.registerHelper('RDV', function(){
 	if (GlobalVars.findOne({"name":"RDV"})===undefined || GlobalVars.findOne({"name":"RDV"}).value=="0") {
 		return
 	}else{
-		return "La prochaine séance débutera ici le "+GlobalVars.findOne({"name":"RDV"}).value
+		return "Les séances se tiendront ici les "+GlobalVars.findOne({"name":"RDV"}).value
 	}
 })
 
