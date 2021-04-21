@@ -1,0 +1,43 @@
+<head>
+  <title>Radio la peinture</title>
+</head>
+
+<template name="radioBrowser">
+</template>
+
+
+
+
+
+<template name="radioMobile">
+	<h1 class = "bigTitle">De près on ne voit que la peinture</h1>
+
+	<div class = "mobileRadioBody">
+	{{> yield "mobileRadioBody"}}
+	</div>
+	
+	<nav class="mobileNav">
+	    <ol>
+	    	{{#if live}}
+	        <li class="navLink">
+	        	{{#if activeLink}}Direct!{{else}}<a href="#">Direct!</a>{{/if}}
+	        </li>
+	        {{/if}}
+			 <li class="navLink">
+	        	{{#if activeLink}}À propos{{else}}<a href="/radio/about/">A propos</a>{{/if}}
+	        </li>		 
+	        <li class="navLink">
+	        	{{#if activeLink}}Discuter{{else}}<a href="/radio/chat/">Discuter</a>{{/if}}
+	        </li>	        
+	        <li class="navLink">
+	        	{{#if activeLink}}Réécouter{{else}}<a href="/radio/archive/">Réécouter</a>{{/if}}
+	        </li>
+	    </ol>
+	</nav></template>
+
+
+<template name="about">about</template>
+
+<template name="chat">cbat</template>
+
+<template name="archive">archive</template>
