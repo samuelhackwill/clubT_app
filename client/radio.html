@@ -10,30 +10,53 @@
 
 
 <template name="radioMobile">
-	<h1 class = "bigTitle">De près on ne voit que la peinture</h1>
+	<div class="mobileRadioContainer">
+		<h1 class = "bigTitle">De près on ne voit que la peinture</h1>
 
-	<div class = "mobileRadioBody">
-	{{> yield "mobileRadioBody"}}
+		<div class = "mobileRadioBody">
+		{{> yield "mobileRadioBody"}}
+		</div>
+		
+		<nav class="mobileNav">
+		    <ol>
+		    	{{#if live}}
+		        <li class="navLink">
+		        	{{#if activeLink}}Direct!{{else}}
+		        		<a href="#">
+		        			<div class="hihi mobileClick">Y</div>
+		        			<span class="navBot">Direct!</span>
+		        		</a>
+		        	{{/if}}
+		        </li>
+		        {{/if}}
+				 <li class="navLink">
+		        	{{#if activeLink}}À propos{{else}}
+		        		<a href="/radio/about/">
+		        			<div class="hihi mobileClick">P</div>
+		        			<span class="navBot">A propos</span>
+		        		</a>
+		        	{{/if}}
+		        </li>		 
+		        <li class="navLink">
+		        	{{#if activeLink}}Discuter{{else}}
+		        		<a href="/radio/chat/">
+							<div class="hihi mobileClick">U</div>
+							<span class="navBot">Discuter</span>
+						</a>
+					{{/if}}
+		        </li>	        
+		        <li class="navLink">
+		        	{{#if activeLink}}Réécouter{{else}}
+		        		<a href="/radio/archive/">
+							<div class="hihi mobileClick">R</div>
+		        			<span class="navBot">Réécouter</span>
+		        		</a>
+		        	{{/if}}
+		        </li>
+		    </ol>
+		</nav>
 	</div>
-	
-	<nav class="mobileNav">
-	    <ol>
-	    	{{#if live}}
-	        <li class="navLink">
-	        	{{#if activeLink}}Direct!{{else}}<a href="#">Direct!</a>{{/if}}
-	        </li>
-	        {{/if}}
-			 <li class="navLink">
-	        	{{#if activeLink}}À propos{{else}}<a href="/radio/about/">A propos</a>{{/if}}
-	        </li>		 
-	        <li class="navLink">
-	        	{{#if activeLink}}Discuter{{else}}<a href="/radio/chat/">Discuter</a>{{/if}}
-	        </li>	        
-	        <li class="navLink">
-	        	{{#if activeLink}}Réécouter{{else}}<a href="/radio/archive/">Réécouter</a>{{/if}}
-	        </li>
-	    </ol>
-	</nav></template>
+</template>
 
 
 <template name="about">about</template>
