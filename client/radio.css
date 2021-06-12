@@ -1,8 +1,21 @@
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
 .mobileRadioContainer{
-	height: 100vh;
+    width: 100vw;
+    height: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	padding: 20px;
 }
 
 .mobileNav > ol{
@@ -19,11 +32,10 @@
 
 .navLink{
 	flex-grow: 1;
-	height: 50px;
-	width: 50px;
+	width: 15vh;
+	height: 15vh;
 
 	background-color:black;
-	padding: 5px;
 
 	border: 1px solid rgb(255, 255, 255);
 	margin-right: 5px;
@@ -36,17 +48,63 @@
 }
 
 .navLink > a{
-	font-size: 3vw;
+	font-size: 40px;
 	display: block;
 	color:white!important;
 	text-decoration: none;
+
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .mobileClick{
-	font-size:30px;
+	font-size:80px;
+}
+
+.mobileTitle{
+	font-size:6vh;
 }
 
 .navBot{
 	position: relative;
 	bottom: 0px;
+}
+
+.about{
+	font-size:60px;
+	height: 35vh;
+	overflow: scroll;
+}
+
+.player{
+	display:none;
+	opacity: 0;
+	height: 15vh;
+	width: 100%;
+	background-color:black;
+}
+
+.navplayer{
+	flex-wrap: wrap;
+}
+
+.navplayer > div{
+	height: 48%;
+	width: 48%;
+	flex-grow: 1;
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+
+	color:white;
+	font-size:4vh;
+}
+
+.centeredText{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
 }
