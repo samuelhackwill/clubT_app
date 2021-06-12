@@ -11,18 +11,28 @@
 
 <template name="radioMobile">
 	<div class="mobileRadioContainer">
-		<h1 class = "bigTitle">De près on ne voit que la peinture</h1>
+		<h1 class = "mobileTitle">De près on ne voit que la peinture</h1>
 
 		<div class = "mobileRadioBody">
 		{{> yield "mobileRadioBody"}}
 		</div>
+
+		<div class = "player">
+		</div>
 		
 		<nav class="mobileNav">
 		    <ol>
-		    	{{#if live}}
+		    	{{#if playing}}
+		    	<li class="navLink navplayer">
+		    	<div class="centeredText">◼</div>
+		    	<div class="centeredText"></div>
+		    	<div class="centeredText">▶</div>
+		    	<div class="centeredText"></div>
+		    	</li>
+		    	{{else}}
 		        <li class="navLink">
-		        	{{#if activeLink}}Direct!{{else}}
-		        		<a href="#">
+		        	{{#if activeLink arg="Direct!"}}Direct!{{else}}
+		        		<a href="#" class="Direct">
 		        			<div class="hihi mobileClick">Y</div>
 		        			<span class="navBot">Direct!</span>
 		        		</a>
@@ -30,7 +40,7 @@
 		        </li>
 		        {{/if}}
 				 <li class="navLink">
-		        	{{#if activeLink}}À propos{{else}}
+		        	{{#if activeLink arg="A propos"}}À propos{{else}}
 		        		<a href="/radio/about/">
 		        			<div class="hihi mobileClick">P</div>
 		        			<span class="navBot">A propos</span>
@@ -38,7 +48,7 @@
 		        	{{/if}}
 		        </li>		 
 		        <li class="navLink">
-		        	{{#if activeLink}}Discuter{{else}}
+		        	{{#if activeLink arg="Discuter"}}Discuter{{else}}
 		        		<a href="/radio/chat/">
 							<div class="hihi mobileClick">U</div>
 							<span class="navBot">Discuter</span>
@@ -46,7 +56,7 @@
 					{{/if}}
 		        </li>	        
 		        <li class="navLink">
-		        	{{#if activeLink}}Réécouter{{else}}
+		        	{{#if activeLink arg="Reecouter"}}Réécouter{{else}}
 		        		<a href="/radio/archive/">
 							<div class="hihi mobileClick">R</div>
 		        			<span class="navBot">Réécouter</span>
@@ -59,8 +69,15 @@
 </template>
 
 
-<template name="about">about</template>
+<template name="about">
+	<div class="about">
+	Est une émission de radio-sur-internet qui se déroule en même temps dans un théâtre quelque part et c'est sûr que Mathilde va vouloir encore écrire un texte super-long et tout.
+	</div>
+</template>
 
-<template name="chat">cbat</template>
+<template name="chat">
+	
+
+</template>
 
 <template name="archive">archive</template>
