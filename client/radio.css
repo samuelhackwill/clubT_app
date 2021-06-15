@@ -4,6 +4,11 @@ body, html {
   margin: 0;
 }
 
+.mobileRadioBody{
+	height: 40vh;
+	overflow-y: scroll;
+}
+
 .mobileRadioContainer{
     width: 100vw;
     height: 100%;
@@ -110,4 +115,10 @@ body, html {
 	justify-content: center;
 	align-content: center;
 	flex-direction: column;
+}
+
+.chatBox{
+	margin-left:5px; 
+	width:95vw; 
+	height: 40vh;
 }

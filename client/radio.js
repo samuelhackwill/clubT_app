@@ -33,7 +33,11 @@ Template.radioMobile.helpers({
 Template.radioMobile.events({
 
 	'click .Direct'(){
-		Session.set("playing", true)
+		if (Session.get("playing")==true) {
+			Session.set("playing", false)
+		}else{
+			Session.set("playing", true)
+		}
 	}
 
 })
