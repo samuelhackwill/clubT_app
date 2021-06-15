@@ -18,23 +18,14 @@
 		
 		<nav class="mobileNav">
 		    <ol>
-		    	{{#if playing}}
-		    	<li class="navLink">
-	        		<a href="#" class="Direct">
-	        			<div class="hihi mobileClick">Y</div>
-	        			<span class="navBot">?...</span>
-	        		</a>
-		    	</li>
-		    	{{else}}
 		        <li class="navLink">
 		        	{{#if activeLink arg="Le direct"}}Direct!{{else}}
-		        		<a href="#" class="Direct">
+		        		<a href="/radio/live/" class="Direct">
 		        			<div class="hihi mobileClick">Y</div>
 		        			<span class="navBot">Le direct</span>
 		        		</a>
 		        	{{/if}}
 		        </li>
-		        {{/if}}
 				 <li class="navLink">
 		        	{{#if activeLink arg="A propos"}}À propos{{else}}
 		        		<a href="/radio/about/">
@@ -96,5 +87,15 @@
 
 		<!-- 1 -->
 		<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/414041124&color=%232c4c40&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/mathildemaillard" title="Mathilde Maillard" target="_blank" style="color: #cccccc; text-decoration: none;">Mathilde Maillard</a> · <a href="https://soundcloud.com/mathildemaillard/de-pres-1-premiere-emission-beta-caroline-godart-philosophe-et-guillaume-maillard-marin" title="De Près #1 Première_émission beta - Caroline Godart, philosophe et Guillaume Maillard, marin" target="_blank" style="color: #cccccc; text-decoration: none;">De Près #1 Première_émission beta - Caroline Godart, philosophe et Guillaume Maillard, marin</a></div>
+	</div>
+</template>
+
+<template name="live">
+	<div class="about">
+	Prochaines dates de direct en 2021 : <br/>
+	Vendredi 18 Juin à 16h & 18h <br/>
+	Samedi 19 Juin à 16h & 18h <br/>
+	Mardi 29 Juin à 17h30 <br/>
+	Mercrdi 30 Juin à 17h30.
 	</div>
 </template>
