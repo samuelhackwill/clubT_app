@@ -36,6 +36,13 @@ Template.radioMobile.events({
 		nicecast = document.getElementById("NcIframe")
 		Session.set("playing", true)
 		nicecast.play()
+		document.getElementsByClassName("player")[0].style.opacity=1
+	},
+
+	'click .player'(){
+		nicecast.pause()
+		Session.set("playing", false)
+		document.getElementsByClassName("player")[0].style.opacity=0
 	}
 
 })
