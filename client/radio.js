@@ -33,17 +33,17 @@ Template.radioMobile.helpers({
 Template.radioMobile.events({
 
 	'click .Direct'(){
-		if (Session.get("playing")==true) {
-			Session.set("playing", false)
-		}else{
-			Session.set("playing", true)
-		}
+		nicecast = document.getElementById("NcIframe")
+		Session.set("playing", true)
+		nicecast.play()
 	}
 
 })
 
 Template.archive.onRendered(function(){
 
+	dots = ["", ".", "..", "..."]
+	counter = 0
 	loadedIframe = 0
 
 	// this is to integrate soundcloud widget API
@@ -52,13 +52,19 @@ Template.archive.onRendered(function(){
 	//# sourceMappingURL=http://ent/web-sourcemaps/api.js-27d0ec1de3c5.map
 	iframeElements = document.getElementsByTagName("iframe");
 	widgets = []
-	for (var i = 0; i <= iframeElements.length ; i++) {
+	for (var i = 0; i <= iframeElements.length-1 ; i++) {
 		console.log(i)
 		widgets[i] = SC.Widget(iframeElements[i]);
 		// this binds a ready event which fires the iframeloaded function
 		// as soon as a widget is loaded.
 		widgets[i].bind(SC.Widget.Events.READY, iframeLoaded)
 	}
+
+	dotsdots = Meteor.setInterval(function(){
+		if (counter==4) {counter=0}
+		document.getElementsByClassName("loading")[0].innerHTML = "Chargement " + dots[counter]
+		counter ++
+	},250)
 
 })
 
@@ -70,6 +76,7 @@ iframeLoaded = function(){
 		console.log("everything's loaded, show the stuff!")
 		document.getElementsByClassName("soundcloudContainer")[0].style.opacity = 1
 		document.getElementsByClassName("loading")[0].style.opacity = 0
+		Meteor.clearInterval(dotsdots)
 	}else{
 		console.log("there's still some stuff to load!")
 	}

@@ -13,13 +13,19 @@
 		{{> yield "mobileRadioBody"}}
 		</div>
 
-		<div class = "player">
+		<audio id="NcIframe" width="500px" height="60" controls>
+			<source src="http://217.182.252.49:8000/listen">
+				Your browser doe not support the audio tag. Sorry!
+		</audio>
+
+		<div class="player">
+			<div> cliquez ici pour interrompre le direct. </div>
 		</div>
-		
+
 		<nav class="mobileNav">
 		    <ol>
 		        <li class="navLink">
-		        	{{#if activeLink arg="Le direct"}}Direct!{{else}}
+		        	{{#if activeLink arg="Le direct"}}Le direct{{else}}
 		        		<a href="/radio/live/" class="Direct">
 		        			<div class="hihi mobileClick">Y</div>
 		        			<span class="navBot">Le direct</span>
@@ -69,7 +75,7 @@
 </template>
 
 <template name="archive">
-	<span class="loading">Chargement...</span>
+	<span class="loading">Chargement .</span>
 
 	<div class="soundcloudContainer">
 		<!-- 5 -->
