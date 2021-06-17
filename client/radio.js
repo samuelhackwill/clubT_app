@@ -4,29 +4,131 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'
 import '/imports/methods';
 import './radio.html';
+import './main.html';
+
+import { Random } from 'meteor/random'
 
 
 Template.radioBrowser.onRendered(function(){
- document.body.style.opacity=1
+	Meteor.subscribe("TheDiscussion",()=>{
+		console.log("arrived!!!")
+		document.getElementsByClassName("chatContainer")[0].style.opacity=1
+	});	
+	Session.set("localId",Random.id())
+	Session.set("playing", false)
+	
+	document.body.style.opacity=1
 })
 
 Template.radioMobile.onRendered(function(){
- document.body.style.opacity=1
+	Meteor.subscribe("TheDiscussion",()=>{
+		console.log("arrived!!!")
+	});	
+	Session.set("localId",Random.id())
+	Session.set("playing", false)
 
- Session.set("playing", false)
+	document.body.style.opacity=1
 })
 
-Template.radioMobile.helpers({
-	live(){
-		return true
-	},
 
+
+Template.radioMobile.helpers({
 	activeLink(arg){
 		console.log(arg.hash.arg)
 	},
 
 	playing(){
 		return Session.get("playing")
+	}
+
+})
+
+Template.chat.helpers({
+	line:function(){
+		if (TheDiscussion.find({}).fetch()[0]==undefined) {
+			return ""
+		}else{
+			return TheDiscussion.find({});
+		}
+	},
+
+	checkVous:function(){
+		if(this.author==Session.get("localId").toString()){
+			return "vous :"
+		}else{
+			return "quelqu'un.e :"
+		}
+	}
+})
+
+Template.radioBrowser.helpers({
+	line:function(){
+		if (TheDiscussion.find({}).fetch()[0]==undefined) {
+			return ""
+		}else{
+			return TheDiscussion.find({});
+		}
+	},
+
+	checkVous:function(){
+		if(this.author==Session.get("localId").toString()){
+			return "vous :"
+		}else{
+			return "quelqu'un.e :"
+		}
+	},
+
+	playing(){
+		return Session.get("playing")
+	}
+})
+
+Template.radioBrowser.events({
+
+	'click #envoyer' : function(){
+		pushTxt();
+		document.getElementById("mainTxtInput").focus()
+		Meteor.call("scrollDiv")
+	},
+
+
+	'keypress #mainTxtInput' : function(e){
+	    e = e || window.event
+		if (e.keyCode == '13'){
+			pushTxt();
+			document.getElementById("mainTxtInput").focus()
+			Meteor.call("scrollDiv")
+			return false
+		}
+	}
+
+})
+
+Template.radioBrowser.events({
+
+	'click #envoyer' : function(){
+		pushTxt();
+		document.getElementById("mainTxtInput").focus()
+		Meteor.call("scrollDiv")
+	},
+
+	'click .playerContainer' : function(){
+		nicecast = document.getElementById("NcIframe")
+		isItPlaying = Session.get("playing")
+		
+		if (isItPlaying==true) {
+			nicecast.pause()
+			document.getElementsByClassName("playerContainer")[0].style.backgroundColor = "black"
+			document.getElementsByClassName("playerContainer")[0].style.color = "white"
+			document.getElementsByClassName("playerContainerSpan")[0].innerHTML = "🔊 écouter le direct"
+		}else{
+			nicecast.play()
+			document.getElementsByClassName("playerContainer")[0].style.backgroundColor = "white"
+			document.getElementsByClassName("playerContainer")[0].style.color = "black"
+			document.getElementsByClassName("playerContainerSpan")[0].innerHTML = "🔇 arrêter d'écouter le direct"
+
+		}
+		Session.set("playing", !isItPlaying)
 	}
 })
 
@@ -43,6 +145,12 @@ Template.radioMobile.events({
 		nicecast.pause()
 		Session.set("playing", false)
 		document.getElementsByClassName("player")[0].style.opacity=0
+	},
+
+	'click #envoyer' : function(){
+		pushTxt();
+		document.getElementById("mainTxtInput").focus()
+		Meteor.call("scrollDiv")
 	}
 
 })
@@ -60,7 +168,6 @@ Template.archive.onRendered(function(){
 	iframeElements = document.getElementsByTagName("iframe");
 	widgets = []
 	for (var i = 0; i <= iframeElements.length-1 ; i++) {
-		console.log(i)
 		widgets[i] = SC.Widget(iframeElements[i]);
 		// this binds a ready event which fires the iframeloaded function
 		// as soon as a widget is loaded.

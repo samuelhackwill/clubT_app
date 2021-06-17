@@ -47,7 +47,7 @@ Meteor.methods({
 
 	scrollDiv : function(){
 		if (Meteor.isClient) {
-			var objDiv = document.getElementById("content");
+			var objDiv = document.getElementById("chat");
 			objDiv.scrollTop = objDiv.scrollHeight;	
 		}
 	}

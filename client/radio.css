@@ -136,12 +136,6 @@ body{
 	flex-direction: column;
 }
 
-.chatBox{
-	margin-left:5px; 
-	width:95vw; 
-	height: 40vh;
-}
-
 .loading{
 	transition: opacity .5s;
   font-size: 2vw;
@@ -187,6 +181,7 @@ body{
 }
 
 .aboutDatesContainer{
+	box-sizing: border-box;
 	max-width: 50%;
 	flex: 1 auto; 
 	font-size: 2vw;
@@ -198,9 +193,45 @@ body{
 	margin-bottom: 2vw;
 }
 
-.chatBrowser{
+.chatContainer{
 	flex: 1 auto; 
 	border: solid black 1px;
+	box-sizing: border-box;
+	max-width: 40%;
+
+	display: flex;
+	flex-flow: row wrap;
+
+	opacity: 0;
+	transition: opacity .5s;
+}
+
+.chatBrowser{
+	flex: 1 auto; 
+	height: 49vh;
+	overflow-y: scroll;
+}
+
+.chatMobile{
+	height: 40vh;
+	width: 100%;
+	overflow-y: scroll;
+}
+
+.actualContentMobile{
+	font-size:60px!important;
+}
+
+.formRRR{
+	width: 100%;
+	flex: 1 auto; 
+	align-self: flex-end;
+	mix-blend-mode: multiply;
+}
+
+.formRRRMOBILE{
+	width: 100%;
+	mix-blend-mode: multiply;
 }
 
 
@@ -211,4 +242,22 @@ body{
 
 #NcIframe{
 	display: none;
+}
+
+.mainTxtInputRRR{
+	font-family: Avara_Black, serif;
+	font-size:20px;
+	border:none;
+	background-color:lightgrey;
+	color:black;
+	width:100%;
+	word-wrap: break-word;
+	resize:none;
+}
+
+.envoyerRRR{
+	font-size: 2vh !important;
+/*	height:3vh;
+*/	font-family: inherit;
+	margin-bottom:10px;
 }

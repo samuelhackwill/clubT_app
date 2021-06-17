@@ -5,14 +5,36 @@
 <template name="radioBrowser">
 
 	<div class="radioBrowser">
+
+		<audio id="NcIframe" width="500px" height="60" controls>
+			<source src="http://217.182.252.49:8000/listen">
+				Your browser doe not support the audio tag. Sorry!
+		</audio>
 		
 		<span class="browserTitle">De près on ne voit que la peinture</span>
 		
 		<button class="playerContainer">
-			<span>▶ écouter le direct</span>
+			<span class="playerContainerSpan">🔊 écouter le direct</span>
 		</button>
 
-		<div class="chatBrowser">
+		<div class="chatContainer">
+			<div class="chatBrowser" id="chat">
+				{{#each line}}
+					<div id="contentblock">
+						<div id="l">
+							<span id="author" class="lowKey">{{checkVous}}</span>
+						</div>
+						<div id="r"><span id="actualContent"> {{content}}</span>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+
+			<div id="form" class="formRRR">
+				<textarea class="mainTxtInputRRR" id="mainTxtInput" type="text" wrap="soft" placeholder="vous pouvez discuter avec les autres auditeurs.trices ici" onfocus="this.placeholder=''" onblur="this.placeholder=''"></textarea>
+				<button class="envoyerRRR" id="envoyer">ENVOYER ⏎</button>
+
+			</div>
 		</div>
 
 		<div class="aboutDatesContainer">
@@ -70,7 +92,7 @@
 		        		</a>
 		        	{{/if}}
 		        </li>		 
-		        <li class="navLink">
+<!-- 		        <li class="navLink">
 		        	{{#if activeLink arg="Discuter"}}Discuter{{else}}
 		        		<a href="/radio/chat/">
 							<div class="hihi mobileClick">U</div>
@@ -78,7 +100,7 @@
 						</a>
 					{{/if}}
 		        </li>	        
-		        <li class="navLink">
+ -->		    <li class="navLink">
 		        	{{#if activeLink arg="Reecouter"}}Réécouter{{else}}
 		        		<a href="/radio/archive/">
 							<div class="hihi mobileClick">R</div>
@@ -99,8 +121,22 @@ De près, on ne voit que la peinture est un dispositif de rencontres en série o
 </template>
 
 <template name="chat">
-	<div class="chatBox">
-		<script id="cid0020000284485380027" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width: 100%;height: 100%;">{"handle":"radiopeinture","arch":"js","styles":{"a":"0084ef","b":100,"c":"FFFFFF","d":"FFFFFF","k":"0084ef","l":"0084ef","m":"0084ef","n":"FFFFFF","p":"18","q":"0084ef","r":100,"usricon":0,"allowpm":0}}</script>
+	<div class="chatMobile" id="chat">
+		{{#each line}}
+			<div id="contentblock">
+				<div id="l">
+					<span id="author" class="lowKey">{{checkVous}}</span>
+				</div>
+				<div id="r"><span id="actualContent" class="actualContentMobile"> {{content}}</span>
+				</div>
+			</div>
+		{{/each}}
+	</div> 
+
+	<div id="form" class="formRRRMOBILE">
+		<textarea class="mainTxtInputRRR" id="mainTxtInput" type="text" wrap="soft" placeholder="(vous pouvez discuter avec les autres auditeurs.trices ici)" onfocus="this.placeholder=''" onblur="this.placeholder=''"></textarea>
+		<button class="envoyerRRR" id="envoyer">ENVOYER ⏎</button>
+
 	</div>
 </template>
 
