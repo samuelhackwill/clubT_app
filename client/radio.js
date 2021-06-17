@@ -69,7 +69,7 @@ Template.archive.onRendered(function(){
 
 	dotsdots = Meteor.setInterval(function(){
 		if (counter==4) {counter=0}
-		document.getElementsByClassName("loading")[0].innerHTML = "Chargement " + dots[counter]
+		document.getElementsByClassName("loading")[0].innerHTML = "chargement des anciennes émissions " + dots[counter]
 		counter ++
 	},250)
 

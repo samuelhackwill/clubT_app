@@ -4,6 +4,35 @@
 
 <template name="radioBrowser">
 
+	<div class="radioBrowser">
+		
+		<span class="browserTitle">De près on ne voit que la peinture</span>
+		
+		<button class="playerContainer">
+			<span>▶ écouter le direct</span>
+		</button>
+
+		<div class="chatBrowser">
+		</div>
+
+		<div class="aboutDatesContainer">
+			<div class="aboutBrowser">
+				De près, on ne voit que la peinture est un dispositif de rencontres en série où l’on s’acharne à faire résonner le mot “travail”, (a priori pas très rigolo) avec d'autres qui sonnent plus doux à l'oreille (comme “chansons loopée” ou “divinations sur le vif”).
+			</div>
+			<div class="datesBrowser">
+				Prochaines dates de direct en 2021 : <br/>
+				Vendredi 18 Juin à 16h & 18h <br/>
+				Samedi 19 Juin à 16h & 18h <br/>
+				Mardi 29 Juin à 17h30 <br/>
+				Mercrdi 30 Juin à 17h30.
+			</div>
+		</div>
+
+		<div class="archivesBrowser">
+			{{>archive}}
+		</div>
+	</div>
+
 </template>
 
 <template name="radioMobile">
@@ -65,7 +94,7 @@
 
 <template name="about">
 	<div class="about">
-	Est une émission de radio-sur-internet qui se déroule en même temps dans un théâtre quelque part et c'est sûr que Mathilde va vouloir encore écrire un texte super-long et tout.
+De près, on ne voit que la peinture est un dispositif de rencontres en série où l’on s’acharne à faire résonner le mot “travail”, (a priori pas très rigolo) avec d'autres qui sonnent plus doux à l'oreille (comme “chansons loopée” ou “divinations sur le vif”).
 	</div>
 </template>
 
@@ -76,8 +105,10 @@
 </template>
 
 <template name="archive">
-	<span class="loading">Chargement .</span>
-
+	<div class="loadingContainer">
+		<span class="loading">chargement des anciennes émissions .</span>
+	</div>
+	
 	<div class="soundcloudContainer">
 		<!-- 5 -->
 
