@@ -9,10 +9,9 @@ import moment from 'moment/min/moment-with-locales.min.js';
 import { Random } from 'meteor/random'
 
 // this is called a spread operator
-//allTarotImgs = [...Array(33).keys()]
-allTarotImgs = [...Array(10).keys()]
+allTarotImgs = [...Array(33).keys()]
 // change in case of change of number of cards
-horizontalOrVertical = ["horizontales(10)", "verticales(10)"]
+horizontalOrVertical = ["horizontales(33)", "verticales(33)"]
 
 cardsAlreadyPlayed = 0
 cardIndex = 1
