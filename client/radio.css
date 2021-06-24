@@ -4,13 +4,16 @@ body, html {
   margin: 0;
 }
 
-body{
-  overflow-y: scroll !important;
+body.radio{
+	overflow-y: scroll !important;
 }
 
 .mobileRadioBody{
 	height: 40vh;
-	overflow-y: scroll;
+}
+
+.radioBrowser{
+	overflow-y:scroll !important;
 }
 
 .mobileRadioContainer{

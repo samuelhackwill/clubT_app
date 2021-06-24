@@ -18,6 +18,7 @@ Template.radioBrowser.onRendered(function(){
 	Session.set("playing", false)
 	
 	document.body.style.opacity=1
+	$(document.body).addClass('radio');
 })
 
 Template.radioMobile.onRendered(function(){
