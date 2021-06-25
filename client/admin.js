@@ -61,12 +61,12 @@ Template.vueAdmin.helpers({
 
 
 Template.vueAdmin.events({
-	// 'keyup #mainTxtInput' : function(e){
-	//     e = e || window.event
-	// 	if (e.keyCode == '13'){
-	// 			pushTxt();
-	// 	}
-	// },
+	'keyup #mainTxtInput' : function(e){
+	    e = e || window.event
+		if (e.keyCode == '13'){
+				pushTxt();
+		}
+	},
 	'keyup #timeRDV' : function(e){
 		whattime = document.getElementById("timeRDV").value
 		fetched = GlobalVars.findOne({"name":"RDV"})

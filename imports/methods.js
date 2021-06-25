@@ -47,7 +47,13 @@ Meteor.methods({
 
 	scrollDiv : function(){
 		if (Meteor.isClient) {
-			var objDiv = document.getElementById("chat");
+			var objDiv = document.getElementById("chat") || document.getElementById("content");
+			// this is probably pretty vicious
+			// i'm using the same chat component
+			// in the radio website and in petit milieu.
+			// so the scrollDiv event scrolls both at the same time
+			// (the two divs containers rendering the component
+			// are called "chat" and "content".)
 			objDiv.scrollTop = objDiv.scrollHeight;	
 		}
 	}
