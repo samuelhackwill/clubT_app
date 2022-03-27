@@ -1,6 +1,23 @@
 import { Meteor } from 'meteor/meteor';
 import '/imports/methods';
 
+const dropboxV2Api = require('dropbox-v2-api');
+const dropbox = dropboxV2Api.authenticate({
+    token: Meteor.settings.dropboxToken
+});
+
+console.log(Meteor.settings.dropboxToken)
+
+dropbox({
+    resource: 'files/list_folder',
+    parameters: {
+        path: ''
+    },
+}, (err, result, response) => {
+    if (err) { return console.log('err:', err); }
+    console.log(result);
+});
+
 Meteor.startup(function(){
   // fixtures
   if(ViewSwitcher.findOne()===undefined){
