@@ -18,7 +18,7 @@ Meteor.startup(function(){
   // just reboot everything when you deploy
   GlobalVars.remove({})
   console.log("reloading GlobalVars")
-  GlobalVars.insert({"name":"RDV", "value":"Vendredi 15/01/21 à 12H30.",})
+  GlobalVars.insert({"name":"RDV", "value":"Vendredi 00/00/00 à 00H00",})
   
   // heure de rdv
   GlobalVars.insert({"name":"phase", "value":1,})

@@ -276,7 +276,7 @@ Template.registerHelper('RDV', function(){
 	if (GlobalVars.findOne({"name":"RDV"})===undefined || GlobalVars.findOne({"name":"RDV"}).value=="0") {
 		return
 	}else{
-		return "Les séances se tiendront ici les "+GlobalVars.findOne({"name":"RDV"}).value
+		return "Prochain rendez-vous le "+GlobalVars.findOne({"name":"RDV"}).value+"."
 	}
 })
 
