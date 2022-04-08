@@ -1,22 +1,24 @@
 import { Meteor } from 'meteor/meteor';
 import '/imports/methods';
 
-const dropboxV2Api = require('dropbox-v2-api');
-const dropbox = dropboxV2Api.authenticate({
-    token: Meteor.settings.dropboxToken
+import { WebApp } from 'meteor/webapp'
+
+
+WebApp.connectHandlers.use('/dropboxNotification', (req, res, next) => {
+
+  // when a message is sent from dropbox, we want to check that
+  // we have all files, or delete old files, etc.
+  Meteor.call("testDropbox")
+
+  // here we're going to look through every filename and curl download
+  // the file to our /private folder for the webapp.
+
+
+  res.writeHead(200, { 'Content-Type': 'text/plain',
+                          'X-Content-Type-Options': 'nosniff' });
+  res.end(req.query.challenge);
 });
 
-console.log(Meteor.settings.dropboxToken)
-
-dropbox({
-    resource: 'files/list_folder',
-    parameters: {
-        path: ''
-    },
-}, (err, result, response) => {
-    if (err) { return console.log('err:', err); }
-    console.log(result);
-});
 
 Meteor.startup(function(){
   // fixtures

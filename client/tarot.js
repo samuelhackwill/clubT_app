@@ -14,6 +14,7 @@ Template.tarot.onRendered(function(){
 	
 	document.body.style.opacity=1
 	$(document.body).addClass('tarot');
+
 })
 
 Template.tarot.helpers({
