@@ -48,15 +48,26 @@ Meteor.methods({
 			// and now we either want to use curl or another solution to
 			// download the files.
 
-			// for (var i = missingFiles.length - 1; i >= 0; i--) {
-			// 	dropbox({
-			// 	    resource: 'files/download',
-			// 	    parameters: {
-			//             "path": "/tarotPlayer/"+missingFiles[i]
-			//         },
-			// 	}, (err, result, response) => {
-			// 	})
-			// }
+			for (var i = missingFiles.length - 1; i >= 0; i--) {
+				console.log("downloading file at /tarotPlayer/"+missingFiles[i])
+				dropbox({
+				    resource: 'files/download',
+				    parameters: {
+			            "path": "/tarotPlayer/"+missingFiles[i]
+			        },
+				}, (err, result, response) => {
+
+					// console.log(" path of app is ", filesPath)
+					console.log("HEADER ", response.headers['dropbox-api-result'])
+
+					// fs.writeFile(response.headers['dropbox-api-result'].name, "yaaahooo", function(err) {
+					//     if(err) {
+					//         return console.log(err);
+					//     }
+					//     console.log("The file was saved!");
+					// }); 
+				})
+			}
 
 		});	
 	}
