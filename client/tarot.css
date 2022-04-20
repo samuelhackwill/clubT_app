@@ -1,0 +1,19 @@
+.soundBytes{
+
+}
+
+.soundBytes > div{
+	background-color: white;
+	padding: 10px;
+	margin-left: 10vw;
+	margin-right: 10vw;
+	margin-top: 5vh;
+	margin-bottom: 5vh;
+	width: 80vw;
+	border: solid 1px black;
+}
+
+
+.soundBytes > div > audio{
+	width: 100%;
+}
