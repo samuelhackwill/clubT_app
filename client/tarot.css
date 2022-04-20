@@ -1,3 +1,8 @@
+body.tarot{
+	overflow: scroll !important;
+}
+
+
 .soundBytes{
 
 }
@@ -11,6 +16,8 @@
 	margin-bottom: 5vh;
 	width: 80vw;
 	border: solid 1px black;
+
+	font-size: xx-large;
 }
 
 
